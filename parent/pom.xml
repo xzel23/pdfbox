@@ -263,15 +263,15 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <showDeprecation>true</showDeprecation>
-                    <target>1.8</target>
-                    <source>1.8</source>
+                    <target>11</target>
+                    <source>11</source>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
+                    <source>11</source>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
@@ -313,31 +313,6 @@
 				   </execution>
 				</executions>
             </plugin>
-	        <plugin>
-	            <groupId>org.codehaus.mojo</groupId>
-	            <artifactId>animal-sniffer-maven-plugin</artifactId>
-	            <version>1.22</version>
-	            <executions>
-	               <execution>
-	                  <id>check-java-version</id>
-	                  <phase>test</phase>
-	                  <goals>
-	                    <goal>check</goal>
-	                  </goals>
-	                  <configuration>
-                            <skip>${skipTests}</skip>
-	                    <signature>
-	                      <groupId>org.codehaus.mojo.signature</groupId>
-	                      <artifactId>java18</artifactId>
-	                      <version>1.0</version>
-	                    </signature>
-	                    <ignores>
-				            <ignore>java.lang.invoke.MethodHandle</ignore>
-				        </ignores>
-	                  </configuration>
-	               </execution>
-	            </executions>
-                </plugin>
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
                 <artifactId>download-maven-plugin</artifactId>
