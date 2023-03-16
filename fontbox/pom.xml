@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox-parent</artifactId>
-    <version>3.0.0-dua3-20230316</version>
+    <version>3.0.0-duathree-20230316</version>
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 
