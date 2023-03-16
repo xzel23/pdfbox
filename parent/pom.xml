@@ -29,7 +29,7 @@
 
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox-parent</artifactId>
-        <version>3.0.0-dua3-SNAPSHOT</version>
+    <version>3.0.0-dua3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>PDFBox parent</name>
@@ -264,15 +264,15 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <showDeprecation>true</showDeprecation>
-                    <target>1.8</target>
-                    <source>1.8</source>
+                    <target>11</target>
+                    <source>11</source>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
+                    <source>11</source>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
@@ -529,8 +529,6 @@
     </developers>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/pdfbox/tags/3.0.0/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/pdfbox/tags/3.0.0/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/pdfbox/tags/3.0.0/trunk</url>
+    <developerConnection>scm:git:https://github.com/xzel23/pdfbox.git</developerConnection>
   </scm>
 </project>

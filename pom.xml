@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox-parent</artifactId>
-        <version>3.0.0-dua3-SNAPSHOT</version>
+    <version>3.0.0-dua3-SNAPSHOT</version>
     <relativePath>parent/pom.xml</relativePath>
   </parent>
 
@@ -33,13 +33,9 @@
   <name>Apache PDFBox</name>
 
   <scm>
-    <connection>
-      scm:svn:http://svn.apache.org/repos/asf/pdfbox/tags/3.0.0
-    </connection>
     <developerConnection>
-      scm:svn:https://svn.apache.org/repos/asf/pdfbox/tags/3.0.0
+      scm:git:https://github.com/xzel23/pdfbox.git
     </developerConnection>
-    <url>http://svn.apache.org/viewvc/pdfbox/tags/3.0.0</url>
   </scm>
 
   <modules>
@@ -59,11 +55,37 @@
 
   <build>
     <plugins>
+      <!--
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
         <configuration>
           <skip>true</skip>
         </configuration>
+      </plugin>
+      -->
+      <!-- deploy to artifactory instead -->
+      <plugin>
+        <groupId>org.jfrog.buildinfo</groupId>
+        <artifactId>artifactory-maven-plugin</artifactId>
+        <version>3.4.0</version>
+        <inherited>false</inherited>
+        <executions>
+          <execution>
+            <id>build-info</id>
+            <goals>
+              <goal>publish</goal>
+            </goals>
+            <configuration>
+              <publisher>
+                <contextUrl>https://dua3.jfrog.io/artifactory</contextUrl>
+                <username>${username}</username>
+                <password>${password}</password>
+                <repoKey>default-libs-release-local</repoKey>
+                <snapshotRepoKey>default-libs-snapshot-local</snapshotRepoKey>
+              </publisher>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
