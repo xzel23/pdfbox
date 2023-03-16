@@ -23,10 +23,10 @@ name: "CodeQL"
 on:
   workflow_dispatch:
   push:
-    branches: [trunk]
+    branches: [dua3]
     # The branches below must be a subset of the branches above
   pull_request:
-    branches: [trunk]
+    branches: [dua3]
 
 jobs:
   analyze:
