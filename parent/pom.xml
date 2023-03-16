@@ -27,6 +27,19 @@
         <relativePath />
     </parent>
 
+    <distributionManagement>
+        <repository>
+            <id>dua3-artifactory-repo</id>
+            <name>Dua3 Artifactory Repository</name>
+            <url>https://dua3.jfrog.io/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>dua3-artifactory-repo-snapshots</id>
+            <name>Dua3 Artifactory Snapshot Repository</name>
+            <url>https://dua3.jfrog.io/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox-parent</artifactId>
     <version>3.0.0-dua3-SNAPSHOT</version>
