@@ -525,6 +525,13 @@
                 <role>Emeritus PMC Member</role>
             </roles>
         </developer>
+        <developer>
+            <id>axh</id>
+            <name>Axel Howind</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
   <scm>
