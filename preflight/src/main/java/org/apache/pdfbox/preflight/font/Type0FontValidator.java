@@ -261,7 +261,7 @@ public class Type0FontValidator extends FontValidator<Type0Container>
             COSName type = aCMap.getCOSName(COSName.TYPE);
             String cmapName = aCMap.getNameAsString(COSName.CMAPNAME);
 
-            if (cmapName == null || "".equals(cmapName) || wmode > 1)
+            if (cmapName == null || cmapName.isEmpty() || wmode > 1)
             {
                 this.fontContainer.push(new ValidationError(ERROR_FONTS_CIDKEYED_CMAP_INVALID_OR_MISSING,
                         font.getName() + ": Some elements in the CMap dictionary are missing or invalid"));

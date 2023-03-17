@@ -59,12 +59,12 @@ public class RDFAboutAttributeConcordanceValidation
         {
             // each rdf:Description must have the same rdf:about (or an empty one)
             String schemaAboutValue = xmpSchema.getAboutValue();
-            if (!("".equals(schemaAboutValue) || "".equals(about) || about.equals(schemaAboutValue)))
+            if (!(schemaAboutValue != null && schemaAboutValue.isEmpty() || about != null && about.isEmpty() || about.equals(schemaAboutValue)))
             {
                 throw new DifferentRDFAboutException();
             }
 
-            if ("".equals(about))
+            if (about != null && about.isEmpty())
             {
                 about = schemaAboutValue;
             }

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -653,8 +654,7 @@ public class GlyphSubstitutionTable extends TTFTable
 
         if (enabledFeatures != null && result.size() > 1)
         {
-            result.sort((o1, o2) -> Integer.compare(enabledFeatures.indexOf(o1.getFeatureTag()),
-                                                    enabledFeatures.indexOf(o2.getFeatureTag())));
+            result.sort(Comparator.comparingInt(o -> enabledFeatures.indexOf(o.getFeatureTag())));
         }
 
         return result;
@@ -668,14 +668,7 @@ public class GlyphSubstitutionTable extends TTFTable
 
     private void removeFeature(List<FeatureRecord> featureRecords, String featureTag)
     {
-        Iterator<FeatureRecord> iter = featureRecords.iterator();
-        while (iter.hasNext())
-        {
-            if (iter.next().getFeatureTag().equals(featureTag))
-            {
-                iter.remove();
-            }
-        }
+        featureRecords.removeIf(featureRecord -> featureRecord.getFeatureTag().equals(featureTag));
     }
 
     private int applyFeature(FeatureRecord featureRecord, int gid)

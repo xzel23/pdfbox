@@ -48,7 +48,7 @@ public class Benchmark
             System.exit(255);
         }
 
-        Integer loop = Integer.parseInt(args[0]);
+        int loop = Integer.parseInt(args[0]);
         FileWriter resFile = new FileWriter(new File(args[1]));
 
         List<File> lfd = new ArrayList<>();

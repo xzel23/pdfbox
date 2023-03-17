@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -102,10 +103,7 @@ class GlyphRenderer
                 Point firstPoint = points[start];
                 Point lastPoint = points[p];
                 List<Point> contour = new ArrayList<>();
-                for (int q = start; q <= p; ++q)
-                {
-                    contour.add(points[q]);
-                }
+                contour.addAll(Arrays.asList(points).subList(start, p + 1));
                 if (points[start].onCurve)
                 {
                     // using start point at the contour end

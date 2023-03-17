@@ -150,7 +150,7 @@ public class RecentFiles
             beginIndex = endIndex;
             remainingLength = fullPath.length() - endIndex;
         }
-        return pieces.toArray(new String[pieces.size()]);
+        return pieces.toArray(new String[0]);
     }
 
     private void writeHistoryToPref(Queue<String> filePaths)

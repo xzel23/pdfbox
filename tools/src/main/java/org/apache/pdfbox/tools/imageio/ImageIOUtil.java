@@ -249,7 +249,7 @@ public final class ImageIOUtil
                 param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
                 if (isTifFormat)
                 {
-                    if ("".equals(compressionType))
+                    if (compressionType != null && compressionType.isEmpty())
                     {
                         // default logic
                         TIFFUtil.setCompressionType(param, image);

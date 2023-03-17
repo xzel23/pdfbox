@@ -20,6 +20,7 @@ package org.apache.fontbox.ttf.gsub;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +44,7 @@ class GlyphArraySplitterRegexImplTest
 
         // then
         assertEquals(Arrays.asList(Arrays.asList(84, 112, 93, 104, 82, 61, 96, 102, 93),
-                Arrays.asList(104, 87), Arrays.asList(110)), tokens);
+                Arrays.asList(104, 87), Collections.singletonList(110)), tokens);
     }
 
     @Test
@@ -78,7 +79,7 @@ class GlyphArraySplitterRegexImplTest
         List<List<Integer>> tokens = testClass.split(glyphIds);
 
         // then
-        assertEquals(Arrays.asList(Arrays.asList(94), Arrays.asList(67, 112, 96),
+        assertEquals(Arrays.asList(Collections.singletonList(94), Arrays.asList(67, 112, 96),
                 Arrays.asList(112, 91, 103)), tokens);
     }
 
@@ -96,7 +97,7 @@ class GlyphArraySplitterRegexImplTest
         List<List<Integer>> tokens = testClass.split(glyphIds);
 
         // then
-        assertEquals(Arrays.asList(Arrays.asList(94, 167, 112, 91, 103)), tokens);
+        assertEquals(Collections.singletonList(Arrays.asList(94, 167, 112, 91, 103)), tokens);
     }
 
 }
