@@ -149,7 +149,7 @@ class GlyphRenderer
     private void moveTo(GeneralPath path, Point point)
     {
         path.moveTo(point.x, point.y);
-        if (LOG.isDebugEnabled())
+        if (LOG.isTraceEnabled())
         {
             LOG.trace("moveTo: " + String.format(Locale.US, "%d,%d", point.x, point.y));
         }
@@ -158,7 +158,7 @@ class GlyphRenderer
     private void lineTo(GeneralPath path, Point point)
     {
         path.lineTo(point.x, point.y);
-        if (LOG.isDebugEnabled())
+        if (LOG.isTraceEnabled())
         {
             LOG.trace("lineTo: " + String.format(Locale.US, "%d,%d", point.x, point.y));
         }
@@ -167,7 +167,7 @@ class GlyphRenderer
     private void quadTo(GeneralPath path, Point ctrlPoint, Point point)
     {
         path.quadTo(ctrlPoint.x, ctrlPoint.y, point.x, point.y);
-        if (LOG.isDebugEnabled())
+        if (LOG.isTraceEnabled())
         {
             LOG.trace("quadTo: " + String.format(Locale.US, "%d,%d %d,%d", ctrlPoint.x, ctrlPoint.y,
                     point.x, point.y));
