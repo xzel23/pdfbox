@@ -178,17 +178,7 @@ public class LogDialog extends JDialog
             infos.add(otherCount + " message" + (otherCount > 1 ? "s" : ""));
         }
         
-        String info = "";
-        for (String str : infos)
-        {
-            if (info.length() > 0)
-            {
-                info += ", ";
-            }
-            info += str;
-        }
-        
-        logLabel.setText(info);
+        logLabel.setText(String.join(", ", infos));
     }
     
     public void clear()

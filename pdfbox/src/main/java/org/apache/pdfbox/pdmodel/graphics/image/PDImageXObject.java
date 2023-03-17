@@ -707,7 +707,7 @@ public final class PDImageXObject extends PDXObject implements PDImage
         final int imgHeight = image.getHeight();
         // largeScale switch is arbitrarily chosen as to where bicubic becomes very slow
         boolean largeScale = width * height > 3000 * 3000 * (type == BufferedImage.TYPE_BYTE_GRAY ? 3 : 1);
-        interpolate &= imgWidth != width || imgHeight != height;
+        interpolate = interpolate && (imgWidth != width || imgHeight != height);
 
         BufferedImage image2 = new BufferedImage(width, height, type);
         if (interpolate)
