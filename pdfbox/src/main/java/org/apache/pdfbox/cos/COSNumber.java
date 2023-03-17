@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  */
 public abstract class COSNumber extends COSBase
 {
-    private static final Pattern PATTERN_NUMBER = Pattern.compile("[0-9]*");
+    private static final Pattern PATTERN_NUMBER = Pattern.compile("[+-]?[0-9]*");
 
     /**
      * This will get the float value of this number.
@@ -84,10 +84,7 @@ public abstract class COSNumber extends COSBase
         }
         catch (NumberFormatException e)
         {
-            // check if the given string could be a number at all
-            String numberString = number.startsWith("+") || number.startsWith("-")
-                    ? number.substring(1) : number;
-            if (!PATTERN_NUMBER.matcher(numberString).matches())
+            if (!PATTERN_NUMBER.matcher(number).matches())
             {
                 throw new IOException("Not a number: " + number);
             }
