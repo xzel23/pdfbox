@@ -217,19 +217,13 @@ class COSDocumentCompressionTest
         {
             PDPage page = new PDPage(new PDRectangle(100, 100));
             document.addPage(page);
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            try
-            {
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
                 contentStream.beginText();
                 contentStream.newLineAtOffset(20, 80);
                 contentStream.setFont(new PDType1Font(FontName.HELVETICA), 12);
                 contentStream.showText("Test");
                 contentStream.endText();
-            }
-            finally
-            {
-                contentStream.close();
             }
 
             document.save(target);

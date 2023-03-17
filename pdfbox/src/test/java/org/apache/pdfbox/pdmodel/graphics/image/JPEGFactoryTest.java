@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import javax.imageio.ImageIO;
 
@@ -322,7 +323,7 @@ class JPEGFactoryTest
                     (PDImageXObject) doc.getPage(0).getResources().getXObject(COSName.getPDFName("Im1"));
             ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
             ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-            try (InputStream dctStream = img.createInputStream(Arrays.asList(COSName.DCT_DECODE.getName())))
+            try (InputStream dctStream = img.createInputStream(Collections.singletonList(COSName.DCT_DECODE.getName())))
             {
                 IOUtils.copy(resourceStream, baos1);
                 IOUtils.copy(dctStream, baos2);

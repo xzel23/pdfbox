@@ -420,7 +420,7 @@ class TestFontEmbedding
         TrueTypeFont mockTtf = Mockito.mock(TrueTypeFont.class);
         OS2WindowsMetricsTable mockOS2 = Mockito.mock(OS2WindowsMetricsTable.class);
         given(mockTtf.getOS2Windows()).willReturn(mockOS2);
-        Boolean embeddingIsPermitted;
+        boolean embeddingIsPermitted;
 
         // TEST 1: 0000 -- Installable embedding versions 0-3+
         given(mockTtf.getOS2Windows().getFsType()).willReturn((short) 0x0000);

@@ -462,14 +462,9 @@ public class CMap
         cmap.codespaceRanges.forEach(this::addCodespaceRange);
         charToUnicodeOneByte.putAll(cmap.charToUnicodeOneByte);
         charToUnicodeTwoBytes.putAll(cmap.charToUnicodeTwoBytes);
-        cmap.charToUnicodeOneByte.entrySet().forEach(entry ->
-            unicodeToByteCodes.put(entry.getValue(), new byte[] {(byte) (entry.getKey() % 0xFF)}));
-        cmap.charToUnicodeTwoBytes.entrySet().forEach(entry ->
-        {
-            Integer key = entry.getKey();
-            unicodeToByteCodes.put(entry.getValue(), 
-                    new byte[] {(byte) ((key >>> 8) & 0xFF), (byte) (key & 0xFF)});
-        });
+        cmap.charToUnicodeOneByte.forEach((key1, value1) -> unicodeToByteCodes.put(value1, new byte[]{(byte) (key1 % 0xFF)}));
+        cmap.charToUnicodeTwoBytes.forEach((key, value) -> unicodeToByteCodes.put(value,
+                new byte[]{(byte) ((key >>> 8) & 0xFF), (byte) (key & 0xFF)}));
         cmap.codeToCid.forEach((key, value) ->
         {
             if (codeToCid.containsKey(key))

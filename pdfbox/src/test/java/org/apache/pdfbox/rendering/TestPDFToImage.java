@@ -317,34 +317,22 @@ public class TestPDFToImage
                 return false;
             }
 
-            FileInputStream lin = new FileInputStream(left);
-            FileInputStream rin = new FileInputStream(right);
-            try
-            {
+            try (FileInputStream lin = new FileInputStream(left); FileInputStream rin = new FileInputStream(right)) {
                 byte[] lbuffer = new byte[4096];
                 byte[] rbuffer = new byte[lbuffer.length];
                 int lcount;
-                while ((lcount = lin.read(lbuffer)) > 0)
-                {
+                while ((lcount = lin.read(lbuffer)) > 0) {
                     int bytesRead = 0;
                     int rcount;
-                    while ((rcount = rin.read(rbuffer, bytesRead, lcount - bytesRead)) > 0)
-                    {
+                    while ((rcount = rin.read(rbuffer, bytesRead, lcount - bytesRead)) > 0) {
                         bytesRead += rcount;
                     }
-                    for (int byteIndex = 0; byteIndex < lcount; byteIndex++)
-                    {
-                        if (lbuffer[byteIndex] != rbuffer[byteIndex])
-                        {
+                    for (int byteIndex = 0; byteIndex < lcount; byteIndex++) {
+                        if (lbuffer[byteIndex] != rbuffer[byteIndex]) {
                             return false;
                         }
                     }
                 }
-            }
-            finally
-            {
-                lin.close();
-                rin.close();
             }
             return true;
         }

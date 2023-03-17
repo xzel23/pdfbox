@@ -22,6 +22,7 @@
 package org.apache.pdfbox.preflight.action.pdfa1b;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.interactive.action.PDAction;
@@ -66,7 +67,7 @@ class TestUriAction extends AbstractTestAction
     void testNextValid() throws Exception
     {
         PDActionURI action = createAction();
-        action.setNext(Arrays.asList(createAction()));
+        action.setNext(Collections.singletonList(createAction()));
         valid(action, true);
     }
 
@@ -74,7 +75,7 @@ class TestUriAction extends AbstractTestAction
     void testNextInvalid() throws Exception
     {
         PDActionURI action = createAction();
-        action.setNext(Arrays.asList(new PDActionJavaScript()));
+        action.setNext(Collections.singletonList(new PDActionJavaScript()));
         valid(action, false, PreflightConstants.ERROR_ACTION_FORBIDDEN_ACTIONS_EXPLICITLY_FORBIDDEN);
     }
 }
