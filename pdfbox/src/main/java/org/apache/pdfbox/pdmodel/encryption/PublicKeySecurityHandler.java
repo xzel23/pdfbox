@@ -212,7 +212,7 @@ public final class PublicKeySecurityHandler extends SecurityHandler<PublicKeyPro
             if (!foundRecipient || envelopedData == null)
             {
                 throw new IOException("The certificate matches none of " + array.size()
-                        + " recipient entries" + extraInfo.toString());
+                        + " recipient entries" + extraInfo);
             }
             if (envelopedData.length != 24)
             {

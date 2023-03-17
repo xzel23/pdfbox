@@ -242,7 +242,7 @@ class TestCOSString extends TestCOSBase
         {
            hex.append( Integer.toHexString(c).toUpperCase() );
         }
-        assertEquals("<"+hex.toString()+">", new String(out.toByteArray(), "ASCII"));
+        assertEquals("<"+ hex +">", new String(out.toByteArray(), "ASCII"));
         
         out.reset();
         COSWriter.writeString(stringHighBits, out);
@@ -252,7 +252,7 @@ class TestCOSString extends TestCOSBase
         {
            hex.append( Integer.toHexString(c).toUpperCase() );
         }
-        assertEquals("<"+hex.toString()+">", new String(out.toByteArray(), "ASCII")); 
+        assertEquals("<"+ hex +">", new String(out.toByteArray(), "ASCII"));
     }
 
     @Override

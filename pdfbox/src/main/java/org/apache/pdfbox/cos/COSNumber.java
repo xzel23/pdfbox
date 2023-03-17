@@ -17,6 +17,7 @@
 package org.apache.pdfbox.cos;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * This class represents an abstract number in a PDF document.
@@ -25,6 +26,8 @@ import java.io.IOException;
  */
 public abstract class COSNumber extends COSBase
 {
+    private static final Pattern PATTERN_NUMBER = Pattern.compile("[0-9]*");
+
     /**
      * This will get the float value of this number.
      *
@@ -84,7 +87,7 @@ public abstract class COSNumber extends COSBase
             // check if the given string could be a number at all
             String numberString = number.startsWith("+") || number.startsWith("-")
                     ? number.substring(1) : number;
-            if (!numberString.matches("[0-9]*"))
+            if (!PATTERN_NUMBER.matcher(numberString).matches())
             {
                 throw new IOException("Not a number: " + number);
             }
