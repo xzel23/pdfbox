@@ -102,8 +102,7 @@ class GlyphRenderer
             {
                 Point firstPoint = points[start];
                 Point lastPoint = points[p];
-                List<Point> contour = new ArrayList<>();
-                contour.addAll(Arrays.asList(points).subList(start, p + 1));
+                List<Point> contour = new ArrayList<>(Arrays.asList(points).subList(start, p + 1));
                 if (points[start].onCurve)
                 {
                     // using start point at the contour end
