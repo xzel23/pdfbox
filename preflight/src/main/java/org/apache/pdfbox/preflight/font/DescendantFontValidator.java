@@ -48,11 +48,11 @@ public abstract class DescendantFontValidator<T extends FontContainer> extends S
     @Override
     protected void checkMandatoryField()
     {
-        boolean arePresent = fontDictionary.containsKey(COSName.TYPE);
-        arePresent &= fontDictionary.containsKey(COSName.SUBTYPE);
-        arePresent &= fontDictionary.containsKey(COSName.BASE_FONT);
-        arePresent &= fontDictionary.containsKey(COSName.CIDSYSTEMINFO);
-        arePresent &= fontDictionary.containsKey(COSName.FONT_DESC);
+        boolean arePresent = fontDictionary.containsKey(COSName.TYPE)
+            && fontDictionary.containsKey(COSName.SUBTYPE)
+            && fontDictionary.containsKey(COSName.BASE_FONT)
+            && fontDictionary.containsKey(COSName.CIDSYSTEMINFO)
+            && fontDictionary.containsKey(COSName.FONT_DESC);
 
         if (!arePresent)
         {
