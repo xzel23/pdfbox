@@ -170,7 +170,7 @@ public class TSAClient
         byte[] response;
         try (InputStream input = connection.getInputStream())
         {
-            response = IOUtils.toByteArray(input);
+            response = input.readAllBytes();
         }
         catch (IOException ex)
         {

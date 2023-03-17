@@ -173,7 +173,7 @@ public final class PDImageXObject extends PDXObject implements PDImage
         COSStream stream = document.getDocument().createCOSStream();
         try (OutputStream output = stream.createRawOutputStream())
         {
-            IOUtils.copy(rawInput, output);
+            rawInput.transferTo(output);
         }
         return stream;
     }

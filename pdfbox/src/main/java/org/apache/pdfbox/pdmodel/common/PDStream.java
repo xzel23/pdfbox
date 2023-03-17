@@ -134,7 +134,7 @@ public class PDStream implements COSObjectable
         stream = doc.getDocument().createCOSStream();
         try (OutputStream output = stream.createOutputStream(filters))
         {
-            IOUtils.copy(input, output);
+            input.transferTo(output);
         }
         finally
         {
@@ -414,7 +414,7 @@ public class PDStream implements COSObjectable
     {
         try (InputStream is = createInputStream())
         {
-            return IOUtils.toByteArray(is);
+            return is.readAllBytes();
         }
     }
     

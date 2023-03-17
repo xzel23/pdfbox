@@ -112,7 +112,7 @@ public final class PDXFAResource implements COSObjectable
     {
         try (final InputStream is = stream.createInputStream())
         {
-            return IOUtils.toByteArray(is);
+            return is.readAllBytes();
         }
     }
     

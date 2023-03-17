@@ -124,7 +124,7 @@ class EndstreamFilterStreamTest
             File f = new File(d, spec.getFile());
             try (OutputStream os = new FileOutputStream(f))
             {
-                IOUtils.copy(input, os);
+                input.transferTo(os);
             }
             assertEquals(17660, f.length());
         }
