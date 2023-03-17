@@ -325,8 +325,8 @@ class JPEGFactoryTest
             ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
             try (InputStream dctStream = img.createInputStream(Collections.singletonList(COSName.DCT_DECODE.getName())))
             {
-                IOUtils.copy(resourceStream, baos1);
-                IOUtils.copy(dctStream, baos2);
+                resourceStream.transferTo(baos1);
+                dctStream.transferTo(baos2);
             }
             resourceStream.close();
             assertArrayEquals(baos1.toByteArray(), baos2.toByteArray());

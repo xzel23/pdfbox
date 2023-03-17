@@ -39,29 +39,9 @@ public final class IOUtils
      */
     private static final Log LOG = LogFactory.getLog(IOUtils.class);
 
-    private IOUtils() {
+    private IOUtils()
+    {
         //Utility class. Don't instantiate.
-    }
-
-    /**
-     * Reads the input stream and returns its contents as a byte array.
-     * @param in the input stream to read from.
-     * @return the byte array
-     * @throws IOException if an I/O error occurs
-     */
-    public static byte[] toByteArray(InputStream in) throws IOException {
-        return in.readAllBytes();
-    }
-
-    /**
-     * Copies all the contents from the given input stream to the given output stream.
-     * @param input the input stream
-     * @param output the output stream
-     * @return the number of bytes that have been copied
-     * @throws IOException if an I/O error occurs
-     */
-    public static long copy(InputStream input, OutputStream output) throws IOException {
-        return input.transferTo(output);
     }
 
     /**
@@ -118,17 +98,18 @@ public final class IOUtils
     /**
      * Provides a function to create an instance of a memory only StreamCache using unrestricted main memory.
      * ScratchFile is used as current default implementation.
-     *
+     * 
      * @return a function to create an instance of a memory only StreamCache using unrestricted main memory
      */
-    public static StreamCacheCreateFunction createMemoryOnlyStreamCache() {
+    public static StreamCacheCreateFunction createMemoryOnlyStreamCache()
+    {
         return MemoryUsageSetting.setupMainMemoryOnly().streamCache;
     }
 
     /**
      * Provides a function to create an instance of a temp file only StreamCache using unrestricted size. ScratchFile is
      * used as current default implementation.
-     *
+     * 
      * @return a function to create an instance of a temp file only StreamCache using unrestricted size
      */
     public static StreamCacheCreateFunction createTempFileOnlyStreamCache()

@@ -860,7 +860,7 @@ public class COSWriter implements ICOSVisitor
     private void doWriteIncrement() throws IOException
     {
         // write existing PDF
-        IOUtils.copy(new RandomAccessInputStream(incrementalInput), incrementalOutput);
+        new RandomAccessInputStream(incrementalInput).transferTo(incrementalOutput);
         // write the actual incremental update
         incrementalOutput.write(((ByteArrayOutputStream) output).toByteArray());
     }
@@ -981,7 +981,7 @@ public class COSWriter implements ICOSVisitor
         System.arraycopy(signatureBytes, 0, incrementPart, incPartSigOffset + 1, signatureBytes.length);
 
         // write the data to the incremental output stream
-        IOUtils.copy(new RandomAccessInputStream(incrementalInput), incrementalOutput);
+        new RandomAccessInputStream(incrementalInput).transferTo(incrementalOutput);
         incrementalOutput.write(incrementPart);
 
         // prevent further use
@@ -1376,7 +1376,7 @@ public class COSWriter implements ICOSVisitor
             if (obj.hasData())
             {
                 input = obj.createRawInputStream();
-                IOUtils.copy(input, getStandardOutput());
+                input.transferTo(getStandardOutput());
             }
             getStandardOutput().writeCRLF();
             getStandardOutput().write(ENDSTREAM);

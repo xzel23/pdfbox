@@ -148,7 +148,7 @@ public class PDFCloneUtility
         try (OutputStream output = newStream.createRawOutputStream();
                 InputStream input = stream.createRawInputStream())
         {
-            IOUtils.copy(input, output);
+            input.transferTo(output);
         }
         clonedVersion.put(stream, newStream);
         for (Map.Entry<COSName, COSBase> entry : stream.entrySet())

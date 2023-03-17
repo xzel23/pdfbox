@@ -138,7 +138,7 @@ public final class ShowSignature
             // see also https://www.pdf-insecurity.org/
             RandomAccessReadBufferedFile raFile = new RandomAccessReadBufferedFile(infile);
             // If your files are not too large, you can also download the PDF into a byte array
-            // with IOUtils.toByteArray() and pass a RandomAccessBuffer() object to the
+            // with .readAllBytes() and pass a RandomAccessBuffer() object to the
             // PDFParser constructor.
             PDFParser parser = new PDFParser(raFile, password);
             try (PDDocument document = parser.parse(false))
@@ -666,7 +666,7 @@ public final class ShowSignature
                 COSStream cosStream = (COSStream) streamObj.getObject();
                 try (InputStream is = cosStream.createInputStream())
                 {
-                    byte[] streamBytes = IOUtils.toByteArray(is);
+                    byte[] streamBytes = is.readAllBytes();
                     System.out.println(description + " (" + elements.indexOf(streamObj) + "): "
                         + Hex.getString(streamBytes));
                 }

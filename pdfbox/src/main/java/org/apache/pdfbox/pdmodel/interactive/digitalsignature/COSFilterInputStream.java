@@ -80,7 +80,7 @@ public class COSFilterInputStream extends FilterInputStream
 
     public byte[] toByteArray() throws IOException
     {
-        return IOUtils.toByteArray(this);
+        return this.readAllBytes();
     }
 
     private void calculateRanges(int[] byteRange)
