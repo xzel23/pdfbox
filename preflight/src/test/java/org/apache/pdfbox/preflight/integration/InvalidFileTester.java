@@ -51,6 +51,10 @@ public class InvalidFileTester
      */
     protected File path;
 
+    protected static Log staticLogger = LogFactory.getLog("Test");
+
+    protected Log logger = null;
+
     /**
      * Prepare the test for one file
      * 
