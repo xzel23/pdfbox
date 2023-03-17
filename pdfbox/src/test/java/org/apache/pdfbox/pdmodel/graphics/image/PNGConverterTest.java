@@ -168,7 +168,7 @@ class PNGConverterTest
     {
         try (PDDocument doc = new PDDocument())
         {
-            byte[] imageBytes = IOUtils.toByteArray(PNGConverterTest.class.getResourceAsStream(name));
+            byte[] imageBytes = PNGConverterTest.class.getResourceAsStream(name).readAllBytes();
             PDImageXObject pdImageXObject = PNGConverter.convertPNGImage(doc, imageBytes);
             assertNull(pdImageXObject);
         }
@@ -178,7 +178,7 @@ class PNGConverterTest
     {
         try (PDDocument doc = new PDDocument())
         {
-            byte[] imageBytes = IOUtils.toByteArray(PNGConverterTest.class.getResourceAsStream(name));
+            byte[] imageBytes = PNGConverterTest.class.getResourceAsStream(name).readAllBytes();
             PDImageXObject pdImageXObject = PNGConverter.convertPNGImage(doc, imageBytes);
             assertNotNull(pdImageXObject);
             
@@ -369,7 +369,7 @@ class PNGConverterTest
 
         try (PDDocument doc = new PDDocument())
         {
-            byte[] imageBytes = IOUtils.toByteArray(PNGConverterTest.class.getResourceAsStream("929316.png"));
+            byte[] imageBytes = PNGConverterTest.class.getResourceAsStream("929316.png").readAllBytes();
             PDImageXObject pdImageXObject = PNGConverter.convertPNGImage(doc, imageBytes);
             assertEquals(COSName.PERCEPTUAL, pdImageXObject.getCOSObject().getItem(COSName.INTENT));
 

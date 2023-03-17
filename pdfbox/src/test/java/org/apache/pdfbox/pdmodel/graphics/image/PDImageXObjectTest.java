@@ -271,7 +271,7 @@ class PDImageXObjectTest
         try (PDDocument doc = new PDDocument())
         {
             File file = new File(PDImageXObjectTest.class.getResource(filename).toURI());
-            byte[] byteArray = IOUtils.toByteArray(new FileInputStream(file));
+            byte[] byteArray = new FileInputStream(file).readAllBytes();
             PDImageXObject image = PDImageXObject.createFromByteArray(doc, byteArray, null);
             
             BufferedImage bim = ImageIO.read(PDImageXObjectTest.class.getResourceAsStream(filename));
@@ -288,7 +288,7 @@ class PDImageXObjectTest
         try (PDDocument doc = new PDDocument())
         {
             File file = new File(PDImageXObjectTest.class.getResource(filename).toURI());
-            byte[] byteArray = IOUtils.toByteArray(new FileInputStream(file));
+            byte[] byteArray = new FileInputStream(file).readAllBytes();
             PDImageXObject image = PDImageXObject.createFromByteArray(doc, byteArray, null);
             
             PDImageXObject expectedImage = CCITTFactory.createFromFile(doc, file);
@@ -304,7 +304,7 @@ class PDImageXObjectTest
         try (PDDocument doc = new PDDocument())
         {
             File file = new File(PDImageXObjectTest.class.getResource(filename).toURI());
-            byte[] byteArray = IOUtils.toByteArray(new FileInputStream(file));
+            byte[] byteArray = new FileInputStream(file).readAllBytes();
             PDImageXObject image = PDImageXObject.createFromByteArray(doc, byteArray, null);
             
             PDImageXObject expectedImage = JPEGFactory.createFromStream(doc, new FileInputStream(file));

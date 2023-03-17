@@ -59,7 +59,7 @@ class CMSProcessableInputStream implements CMSTypedData
     public void write(OutputStream out) throws IOException, CMSException
     {
         // read the content only one time
-        IOUtils.copy(in, out);
+        in.transferTo(out);
         in.close();
     }
 

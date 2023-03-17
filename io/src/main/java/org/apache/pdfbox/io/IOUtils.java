@@ -19,22 +19,15 @@
 
 package org.apache.pdfbox.io;
 
-import static java.lang.invoke.MethodHandles.constant;
-import static java.lang.invoke.MethodHandles.dropArguments;
-import static java.lang.invoke.MethodHandles.filterReturnValue;
-import static java.lang.invoke.MethodHandles.guardWithTest;
-import static java.lang.invoke.MethodHandles.lookup;
-import static java.lang.invoke.MethodType.methodType;
-import static java.util.Objects.nonNull;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.pdfbox.io.RandomAccessStreamCache.StreamCacheCreateFunction;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles.Lookup;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -44,9 +37,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.pdfbox.io.RandomAccessStreamCache.StreamCacheCreateFunction;
+import static java.lang.invoke.MethodHandles.constant;
+import static java.lang.invoke.MethodHandles.dropArguments;
+import static java.lang.invoke.MethodHandles.filterReturnValue;
+import static java.lang.invoke.MethodHandles.guardWithTest;
+import static java.lang.invoke.MethodHandles.lookup;
+import static java.lang.invoke.MethodType.methodType;
+import static java.util.Objects.nonNull;
 
 /**
  * This class contains various I/O-related methods.
@@ -71,39 +68,6 @@ public final class IOUtils
     private IOUtils()
     {
         //Utility class. Don't instantiate.
-    }
-
-    /**
-     * Reads the input stream and returns its contents as a byte array.
-     * @param in the input stream to read from.
-     * @return the byte array
-     * @throws IOException if an I/O error occurs
-     */
-    public static byte[] toByteArray(InputStream in) throws IOException
-    {
-        ByteArrayOutputStream baout = new ByteArrayOutputStream();
-        copy(in, baout);
-        return baout.toByteArray();
-    }
-
-    /**
-     * Copies all the contents from the given input stream to the given output stream.
-     * @param input the input stream
-     * @param output the output stream
-     * @return the number of bytes that have been copied
-     * @throws IOException if an I/O error occurs
-     */
-    public static long copy(InputStream input, OutputStream output) throws IOException
-    {
-        byte[] buffer = new byte[4096];
-        long count = 0;
-        int n = 0;
-        while (-1 != (n = input.read(buffer)))
-        {
-            output.write(buffer, 0, n);
-            count += n;
-        }
-        return count;
     }
 
     /**

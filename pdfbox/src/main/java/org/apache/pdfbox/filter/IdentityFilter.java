@@ -35,7 +35,7 @@ final class IdentityFilter extends Filter
                                          COSDictionary parameters, int index)
         throws IOException
     {
-        IOUtils.copy(encoded, decoded);
+        encoded.transferTo(decoded);
         decoded.flush();
         return new DecodeResult(parameters);
     }
@@ -44,7 +44,7 @@ final class IdentityFilter extends Filter
     protected void encode(InputStream input, OutputStream encoded, COSDictionary parameters)
         throws IOException
     {
-        IOUtils.copy(input, encoded);
+        input.transferTo(encoded);
         encoded.flush();
     }
 }
