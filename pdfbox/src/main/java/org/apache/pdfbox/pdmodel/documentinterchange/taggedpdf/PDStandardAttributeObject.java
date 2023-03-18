@@ -320,7 +320,7 @@ public abstract class PDStandardAttributeObject extends PDAttributeObject
         {
             return ((COSNumber) v).floatValue();
         }
-        if (Float.compare(defaultValue, UNSPECIFIED) == 0)
+        if (defaultValue == UNSPECIFIED)
         {
             return null;
         }

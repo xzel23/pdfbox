@@ -606,7 +606,7 @@ public class PDFTextStripper extends LegacyPDFStreamEngine
                 // Compares the values obtained by the average method and the wordSpacing method
                 // and picks the smaller number.
                 float expectedStartOfNextWordX = EXPECTED_START_OF_NEXT_WORD_X_RESET_VALUE;
-                if (Float.compare(endOfLastTextX, END_OF_LAST_TEXT_X_RESET_VALUE) != 0)
+                if (endOfLastTextX != END_OF_LAST_TEXT_X_RESET_VALUE)
                 {
                     expectedStartOfNextWordX = endOfLastTextX + Math.min(deltaSpace, deltaCharWidth);
                 }

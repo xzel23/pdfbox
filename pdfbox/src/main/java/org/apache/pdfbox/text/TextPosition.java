@@ -292,15 +292,15 @@ public final class TextPosition
         {
             return textMatrix.getTranslateX();
         }
-        else if (Float.compare(rotation, 90) == 0)
+        else if (rotation == 90)
         {
             return textMatrix.getTranslateY();
         }
-        else if (Float.compare(rotation, 180) == 0)
+        else if (rotation == 180)
         {
             return pageWidth - textMatrix.getTranslateX();
         }
-        else if (Float.compare(rotation, 270) == 0)
+        else if (rotation == 270)
         {
             return pageHeight - textMatrix.getTranslateY();
         }
@@ -355,15 +355,15 @@ public final class TextPosition
         {
             return textMatrix.getTranslateY();
         }
-        else if (Float.compare(rotation, 90) == 0)
+        else if (rotation == 90)
         {
             return pageWidth - textMatrix.getTranslateX();
         }
-        else if (Float.compare(rotation, 180) == 0)
+        else if (rotation == 180)
         {
             return pageHeight - textMatrix.getTranslateY();
         }
-        else if (Float.compare(rotation, 270) == 0)
+        else if (rotation == 270)
         {
             return textMatrix.getTranslateX();
         }
