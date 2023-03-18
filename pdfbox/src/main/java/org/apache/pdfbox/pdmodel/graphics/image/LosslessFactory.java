@@ -117,19 +117,9 @@ public final class LosslessFactory
 
     private static boolean isGrayImage(BufferedImage image)
     {
-        if (image.getTransparency() != Transparency.OPAQUE)
-        {
-            return false;
-        }
-        if (image.getType() == BufferedImage.TYPE_BYTE_GRAY && image.getColorModel().getPixelSize() <= 8)
-        {
-            return true;
-        }
-        if (image.getType() == BufferedImage.TYPE_BYTE_BINARY && image.getColorModel().getPixelSize() == 1)
-        {
-            return true;
-        }
-        return false;
+        return (image.getTransparency() == Transparency.OPAQUE)
+            && (    (image.getType() == BufferedImage.TYPE_BYTE_GRAY && image.getColorModel().getPixelSize() <= 8)
+                 || (image.getType() == BufferedImage.TYPE_BYTE_BINARY && image.getColorModel().getPixelSize() == 1) );
     }
 
     // grayscale images need one color per sample

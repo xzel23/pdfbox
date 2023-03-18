@@ -19,6 +19,7 @@ package org.apache.fontbox.ttf.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -86,37 +87,11 @@ public class MapBackedScriptFeature implements ScriptFeature
         {
             return true;
         }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
+        if (obj == null || getClass() != obj.getClass())
         {
             return false;
         }
         MapBackedScriptFeature other = (MapBackedScriptFeature) obj;
-        if (featureMap == null)
-        {
-            if (other.featureMap != null)
-            {
-                return false;
-            }
-        }
-        else if (!featureMap.equals(other.featureMap))
-        {
-            return false;
-        }
-        if (name == null)
-        {
-            if (other.name != null)
-            {
-                return false;
-            }
-        }
-        else if (!name.equals(other.name))
-        {
-            return false;
-        }
-        return true;
+        return Objects.equals(name, other.name) && Objects.equals(featureMap, other.featureMap);
     }
 }

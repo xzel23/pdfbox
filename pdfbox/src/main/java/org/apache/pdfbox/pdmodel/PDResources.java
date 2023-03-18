@@ -470,10 +470,7 @@ public final class PDResources implements COSObjectable
                 {
                     return false;
                 }
-                if (hasColorSpace(colorSpaceName))
-                {
-                    return false;
-                }
+                return !hasColorSpace(colorSpaceName);
             }
         }
         return true;

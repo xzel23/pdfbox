@@ -631,10 +631,7 @@ public class SynchronizedMetaDataValidation
         if (item instanceof COSString)
         {
             String date = ((COSString) item).getString();
-            if (date.matches("D:\\d{4}(\\d{2}(\\d{2}(\\d{2}(\\d{2}(\\d{2}([\\+\\-Z](\\d{2}'\\d{2}')?)?)?)?)?)?)?"))
-            {
-                return true;
-            }
+            return date.matches("D:\\d{4}(\\d{2}(\\d{2}(\\d{2}(\\d{2}(\\d{2}([\\+\\-Z](\\d{2}'\\d{2}')?)?)?)?)?)?)?");
         }
         return false;
     }

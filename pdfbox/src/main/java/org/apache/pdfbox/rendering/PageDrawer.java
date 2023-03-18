@@ -1997,14 +1997,11 @@ public class PageDrawer extends PDFGraphicsStreamEngine
             RenderState printState = group.getRenderState(destination);
             if (printState == null)
             {
-                if (!getRenderer().isGroupEnabled(group))
-                {
-                    return true;
-                }
+                return !getRenderer().isGroupEnabled(group);
             }
-            else if (RenderState.OFF.equals(printState))
+            else
             {
-                return true;
+                return RenderState.OFF == printState;
             }
         }
         else if (propertyList instanceof PDOptionalContentMembershipDictionary)
