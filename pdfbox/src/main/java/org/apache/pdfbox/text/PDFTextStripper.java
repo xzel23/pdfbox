@@ -572,7 +572,7 @@ public class PDFTextStripper extends LegacyPDFStreamEngine
                 // space character with some margin.
                 float wordSpacing = position.getWidthOfSpace();
                 float deltaSpace;
-                if (Float.compare(wordSpacing, 0) == 0 || Float.isNaN(wordSpacing))
+                if (wordSpacing == 0 || Float.isNaN(wordSpacing))
                 {
                     deltaSpace = Float.MAX_VALUE;
                 }
@@ -640,7 +640,7 @@ public class PDFTextStripper extends LegacyPDFStreamEngine
                         minYTopForLine = MIN_Y_TOP_FOR_LINE_RESET_VALUE;
                     }
                     // test if our TextPosition starts after a new word would be expected to start
-                    if (Float.compare(expectedStartOfNextWordX, EXPECTED_START_OF_NEXT_WORD_X_RESET_VALUE) != 0
+                    if (expectedStartOfNextWordX != EXPECTED_START_OF_NEXT_WORD_X_RESET_VALUE
                             && expectedStartOfNextWordX < positionX
                             // only bother adding a word separator if the last character was not a word separator
                             && (wordSeparator.isEmpty() || //

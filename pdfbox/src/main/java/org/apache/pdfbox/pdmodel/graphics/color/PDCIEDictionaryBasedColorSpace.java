@@ -70,9 +70,9 @@ public abstract class PDCIEDictionaryBasedColorSpace extends PDCIEBasedColorSpac
      */
     protected boolean isWhitePoint()
     {
-        return  Float.compare(wpX, 1) == 0 &&
-                Float.compare(wpY, 1) == 0 && 
-                Float.compare(wpZ, 1)  == 0;
+        return  wpX == 1 &&
+                wpY == 1 &&
+                wpZ == 1;
     }
 
     private void fillWhitepointCache(PDTristimulus whitepoint)
