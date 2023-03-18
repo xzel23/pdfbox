@@ -74,7 +74,7 @@ public class BlendMode
 
     private static final BlendChannelFunction fColorDodge = (src, dest) -> {
         // See PDF 2.0 specification
-        if (Float.compare(dest, 0) == 0)
+        if (dest == 0)
         {
             return 0f;
         }

@@ -290,7 +290,7 @@ class PDDefaultAppearanceString
     void writeTo(PDAppearanceContentStream contents, float zeroFontSize) throws IOException
     {
         float fontSize = getFontSize();
-        if (Float.compare(fontSize, 0) == 0)
+        if (fontSize == 0)
         {
             fontSize = zeroFontSize;
         }

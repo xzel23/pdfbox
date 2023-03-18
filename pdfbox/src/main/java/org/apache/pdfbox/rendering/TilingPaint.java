@@ -206,14 +206,14 @@ class TilingPaint implements Paint
             throw new IOException("Pattern /BBox is missing");
         }
         float xStep = pattern.getXStep();
-        if (Float.compare(xStep, 0) == 0)
+        if (xStep == 0)
         {
             LOG.warn("/XStep is 0, using pattern /BBox width");
             xStep = bbox.getWidth();
         }
 
         float yStep = pattern.getYStep();
-        if (Float.compare(yStep, 0) == 0)
+        if (yStep == 0)
         {
             LOG.warn("/YStep is 0, using pattern /BBox height");
             yStep = bbox.getHeight();

@@ -213,15 +213,15 @@ public class PDType3Font extends PDSimpleFont
             {
                 retval = bbox.getHeight() / 2;
             }
-            if (Float.compare(retval, 0) == 0)
+            if (retval == 0)
             {
                 retval = desc.getCapHeight();
             }
-            if (Float.compare(retval, 0) == 0)
+            if (retval == 0)
             {
                 retval = desc.getAscent();
             }
-            if (Float.compare(retval, 0) == 0)
+            if (retval == 0)
             {
                 retval = desc.getXHeight();
                 if (retval > 0)
