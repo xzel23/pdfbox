@@ -679,7 +679,7 @@ public class CMapParser
             Map<String, Object> result = new HashMap<>();
             // we are reading a dictionary
             Object key = parseNextToken(randomAcccessRead);
-            while (key instanceof LiteralName && !MARK_END_OF_DICTIONARY.equals(key))
+            while (key instanceof LiteralName && !MARK_END_OF_DICTIONARY.equals(key)) // FIXME right operand is always true
             {
                 Object value = parseNextToken(randomAcccessRead);
                 result.put(((LiteralName) key).name, value);
