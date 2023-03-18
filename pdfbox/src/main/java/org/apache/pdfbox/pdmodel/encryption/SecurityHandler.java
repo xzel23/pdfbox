@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.crypto.Cipher;
@@ -435,11 +436,7 @@ public abstract class SecurityHandler<T_POLICY extends ProtectionPolicy>
      */
     private SecureRandom getSecureRandom()
     {
-        if (customSecureRandom != null)
-        {
-            return customSecureRandom;
-        }
-        return new SecureRandom();
+        return Objects.requireNonNullElseGet(customSecureRandom, SecureRandom::new);
     }
 
     /**

@@ -39,17 +39,12 @@ import org.apache.pdfbox.cos.COSName;
  */
 public final class RenderingIntents
 {
-    private static final List<COSName> RENDERING_INTENTS;
-
-    static
-    {
-        List<COSName> al = new ArrayList<>(4);
-        al.add(COSName.RELATIVE_COLORIMETRIC);
-        al.add(COSName.ABSOLUTE_COLORIMETRIC);
-        al.add(COSName.PERCEPTUAL);
-        al.add(COSName.SATURATION);
-        RENDERING_INTENTS = Collections.unmodifiableList(al);
-    }
+    private static final List<COSName> RENDERING_INTENTS = List.of(
+            COSName.RELATIVE_COLORIMETRIC,
+            COSName.ABSOLUTE_COLORIMETRIC,
+            COSName.PERCEPTUAL,
+            COSName.SATURATION
+    );
 
     private RenderingIntents()
     {

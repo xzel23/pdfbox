@@ -20,6 +20,7 @@ import java.awt.geom.GeneralPath;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -165,15 +166,8 @@ public abstract class PDSimpleFont extends PDFont
         if (isSymbolic == null)
         {
             Boolean result = isFontSymbolic();
-            if (result != null)
-            {
-                isSymbolic = result;
-            }
-            else
-            {
-                // unless we can prove that the font is non-symbolic, we assume that it is not
-                isSymbolic = true;
-            }
+            // unless we can prove that the font is non-symbolic, we assume that it is not
+            isSymbolic = Objects.requireNonNullElse(result, true);
         }
         return isSymbolic;
     }

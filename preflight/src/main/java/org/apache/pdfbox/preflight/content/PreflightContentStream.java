@@ -25,6 +25,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
+
 import org.apache.pdfbox.contentstream.operator.Operator;
 import org.apache.pdfbox.contentstream.operator.OperatorName;
 import org.apache.pdfbox.cos.COSArray;
@@ -92,15 +94,8 @@ public class PreflightContentStream extends PreflightStreamEngine
         try
         {
             // workaround for preflight not finding widget annotation parent PDPage
-            if (processedPage == null)
-            {
-                // dummy page, resource lookup may fail
-                processChildStream(form, new PDPage()); 
-            }
-            else
-            {
-                processChildStream(form, processedPage);
-            }
+            // dummy page, resource lookup may fail
+            processChildStream(form, Objects.requireNonNullElseGet(processedPage, PDPage::new));
         }
         catch (ContentStreamException e)
         {
