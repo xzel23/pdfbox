@@ -132,13 +132,8 @@ public class PDStream implements COSObjectable
     private PDStream(PDDocument doc, InputStream input, COSBase filters) throws IOException
     {
         stream = doc.getDocument().createCOSStream();
-        try (OutputStream output = stream.createOutputStream(filters))
-        {
-            IOUtils.copy(input, output);
-        }
-        finally
-        {
-            input.close();
+        try (input; OutputStream output = stream.createOutputStream(filters)) {
+            input.transferTo(output);
         }
     }
 
@@ -406,7 +401,7 @@ public class PDStream implements COSObjectable
     {
         try (InputStream is = createInputStream())
         {
-            return IOUtils.toByteArray(is);
+            return is.readAllBytes();
         }
     }
     

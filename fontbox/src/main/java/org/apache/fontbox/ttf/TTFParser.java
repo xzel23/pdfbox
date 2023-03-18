@@ -61,19 +61,12 @@ public class TTFParser
     public TrueTypeFont parse(RandomAccessRead randomAccessRead) throws IOException
     {
         RandomAccessReadDataStream dataStream = new RandomAccessReadDataStream(randomAccessRead);
-        try
-        {
+        try (randomAccessRead) {
             return parse(dataStream);
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             // close only on error (source is still being accessed later)
             dataStream.close();
             throw ex;
-        }
-        finally
-        {
-            randomAccessRead.close();
         }
     }
 
@@ -88,19 +81,12 @@ public class TTFParser
     {
         this.isEmbedded = true;
         RandomAccessReadDataStream dataStream = new RandomAccessReadDataStream(inputStream);
-        try
-        {
+        try (inputStream) {
             return parse(dataStream);
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             // close only on error (source is still being accessed later)
             dataStream.close();
             throw ex;
-        }
-        finally
-        {
-            inputStream.close();
         }
     }
 

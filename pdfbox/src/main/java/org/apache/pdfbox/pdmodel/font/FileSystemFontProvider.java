@@ -652,19 +652,14 @@ final class FileSystemFontProvider extends FontProvider
      */
     private void addTrueTypeFontImpl(TrueTypeFont ttf, File file) throws IOException
     {
-        try
-        {
+        try (ttf) {
             // read PostScript name, if any
-            if (ttf.getName() != null && ttf.getName().contains("|"))
-            {
+            if (ttf.getName() != null && ttf.getName().contains("|")) {
                 fontInfoList.add(new FSIgnored(file, FontFormat.TTF, "*skippipeinname*"));
                 LOG.warn("Skipping font with '|' in name " + ttf.getName() + " in file " + file);
-            }
-            else if (ttf.getName() != null)
-            {
+            } else if (ttf.getName() != null) {
                 // ignore bitmap fonts
-                if (ttf.getHeader() == null)
-                {
+                if (ttf.getHeader() == null) {
                     fontInfoList.add(new FSIgnored(file, FontFormat.TTF, ttf.getName()));
                     return;
                 }
@@ -677,8 +672,7 @@ final class FileSystemFontProvider extends FontProvider
                 byte[] panose = null;
                 OS2WindowsMetricsTable os2WindowsMetricsTable = ttf.getOS2Windows();
                 // Apple's AAT fonts don't have an OS/2 table
-                if (os2WindowsMetricsTable != null)
-                {
+                if (os2WindowsMetricsTable != null) {
                     sFamilyClass = os2WindowsMetricsTable.getFamilyClass();
                     usWeightClass = os2WindowsMetricsTable.getWeightClass();
                     ulCodePageRange1 = (int) os2WindowsMetricsTable.getCodePageRange1();
@@ -687,14 +681,12 @@ final class FileSystemFontProvider extends FontProvider
                 }
 
                 String format;
-                if (ttf instanceof OpenTypeFont && ((OpenTypeFont)ttf).isPostScript())
-                {
+                if (ttf instanceof OpenTypeFont && ((OpenTypeFont) ttf).isPostScript()) {
                     format = "OTF";
-                    CFFFont cff = ((OpenTypeFont)ttf).getCFF().getFont();
+                    CFFFont cff = ((OpenTypeFont) ttf).getCFF().getFont();
                     CIDSystemInfo ros = null;
-                    if (cff instanceof CFFCIDFont)
-                    {
-                        CFFCIDFont cidFont = (CFFCIDFont)cff;
+                    if (cff instanceof CFFCIDFont) {
+                        CFFCIDFont cidFont = (CFFCIDFont) cff;
                         String registry = cidFont.getRegistry();
                         String ordering = cidFont.getOrdering();
                         int supplement = cidFont.getSupplement();
@@ -703,12 +695,9 @@ final class FileSystemFontProvider extends FontProvider
                     fontInfoList.add(new FSFontInfo(file, FontFormat.OTF, ttf.getName(), ros,
                             usWeightClass, sFamilyClass, ulCodePageRange1, ulCodePageRange2,
                             macStyle, panose, this));
-                }
-                else
-                {
+                } else {
                     CIDSystemInfo ros = null;
-                    if (ttf.getTableMap().containsKey("gcid"))
-                    {
+                    if (ttf.getTableMap().containsKey("gcid")) {
                         // Apple's AAT fonts have a "gcid" table with CID info
                         byte[] bytes = ttf.getTableBytes(ttf.getTableMap().get("gcid"));
                         String reg = new String(bytes, 10, 64, StandardCharsets.US_ASCII);
@@ -718,38 +707,28 @@ final class FileSystemFontProvider extends FontProvider
                         int supplementVersion = bytes[140] << 8 & (bytes[141] & 0xFF);
                         ros = new CIDSystemInfo(registryName, orderName, supplementVersion);
                     }
-                    
+
                     format = "TTF";
                     fontInfoList.add(new FSFontInfo(file, FontFormat.TTF, ttf.getName(), ros,
                             usWeightClass, sFamilyClass, ulCodePageRange1, ulCodePageRange2,
                             macStyle, panose, this));
                 }
 
-                if (LOG.isTraceEnabled())
-                {
+                if (LOG.isTraceEnabled()) {
                     NamingTable name = ttf.getNaming();
-                    if (name != null)
-                    {
-                        LOG.trace(format +": '" + name.getPostScriptName() + "' / '" +
-                                  name.getFontFamily() + "' / '" +
-                                  name.getFontSubFamily() + "'");
+                    if (name != null) {
+                        LOG.trace(format + ": '" + name.getPostScriptName() + "' / '" +
+                                name.getFontFamily() + "' / '" +
+                                name.getFontSubFamily() + "'");
                     }
                 }
-            }
-            else
-            {
+            } else {
                 fontInfoList.add(new FSIgnored(file, FontFormat.TTF, "*skipnoname*"));
                 LOG.warn("Missing 'name' entry for PostScript name in font " + file);
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             fontInfoList.add(new FSIgnored(file, FontFormat.TTF, "*skipexception*"));
             LOG.warn("Could not load font file: " + file, e);
-        }
-        finally
-        {
-            ttf.close();
         }
     }
 
