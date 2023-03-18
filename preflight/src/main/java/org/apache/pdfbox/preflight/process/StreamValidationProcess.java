@@ -52,7 +52,7 @@ public class StreamValidationProcess extends AbstractProcess
         // get all keys with a positive offset in ascending order to read the pdf linear
         List<COSObjectKey> objectKeys = cosDocument.getXrefTable().entrySet().stream() //
                 .filter(e -> e.getValue() > 0L) //
-                .sorted(Comparator.comparing(Entry::getValue)) //
+                .sorted(Entry.comparingByValue()) //
                 .map(Entry::getKey) //
                 .collect(Collectors.toList());
 
