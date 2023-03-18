@@ -102,7 +102,7 @@ class TestCOSInteger extends TestCOSNumber
     {
         for (int i = -1000; i < 3000; i += 200)
         {
-            assertEquals((float) i, COSInteger.get(i).floatValue());
+            assertEquals(i, COSInteger.get(i).floatValue());
         }
     }
 
@@ -122,7 +122,7 @@ class TestCOSInteger extends TestCOSNumber
     {
         for (int i = -1000; i < 3000; i += 200)
         {
-            assertEquals((long) i, COSInteger.get(i).longValue());
+            assertEquals(i, COSInteger.get(i).longValue());
         }
     }
 

@@ -83,10 +83,10 @@ class PNGConverterTest
             assertEquals(4, bytes.length);
             System.out.printf("\tprivate static final int CHUNK_%s = 0x%02X%02X%02X%02X; // %s: %d %d %d %d%n",
                     chunkType,
-                    (int) bytes[0] & 0xFF,
-                    (int) bytes[1] & 0xFF, (int) bytes[2] & 0xFF, (int) bytes[3] & 0xFF, chunkType,
-                    (int) bytes[0] & 0xFF, (int) bytes[1] & 0xFF, (int) bytes[2] & 0xFF,
-                    (int) bytes[3] & 0xFF);
+                    bytes[0] & 0xFF,
+                    bytes[1] & 0xFF, bytes[2] & 0xFF, bytes[3] & 0xFF, chunkType,
+                    bytes[0] & 0xFF, bytes[1] & 0xFF, bytes[2] & 0xFF,
+                    bytes[3] & 0xFF);
         }
     }
 

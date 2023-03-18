@@ -94,7 +94,7 @@ class TestNumberFormatUtil
                 "+Infinity should not be formattable");
         assertEquals(-1, NumberFormatUtil.formatFloatFast(Float.NEGATIVE_INFINITY, 5, buffer),
                 "-Infinity should not be formattable");
-        assertEquals(-1, NumberFormatUtil.formatFloatFast(((float) Long.MAX_VALUE) + 1000000000000f,
+        assertEquals(-1, NumberFormatUtil.formatFloatFast(Long.MAX_VALUE + 1000000000000f,
                 5, buffer), "Too big number should not be formattable");
         assertEquals(-1, NumberFormatUtil.formatFloatFast(Long.MIN_VALUE, 5, buffer),
                 "Too big negative number should not be formattable");

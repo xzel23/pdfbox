@@ -121,7 +121,7 @@ public class PDShadingType4 extends PDTriangleBasedShadingType
 
         try (ImageInputStream mciis = new MemoryCacheImageInputStream(stream.createInputStream()))
         {
-            byte flag = (byte) 0;
+            byte flag = 0;
             try
             {
                 flag = (byte) (mciis.readBits(bitsPerFlag) & 3);
