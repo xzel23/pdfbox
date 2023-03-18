@@ -325,7 +325,7 @@ class PDAcroFormFromAnnotsTest
     /*
      * Create fields from widget annotations
      */
-    class CreateFieldsFixup extends AbstractFixup
+    static class CreateFieldsFixup extends AbstractFixup
     {
         CreateFieldsFixup(PDDocument document)
         { 

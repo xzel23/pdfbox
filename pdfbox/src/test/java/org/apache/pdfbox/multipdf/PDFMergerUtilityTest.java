@@ -810,7 +810,7 @@ class PDFMergerUtilityTest
         }
     }
 
-    private class ElementCounter
+    private static class ElementCounter
     {
         int cnt = 0;
         final Set<COSBase> set = new HashSet<>();

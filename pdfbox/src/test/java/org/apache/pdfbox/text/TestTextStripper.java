@@ -615,7 +615,7 @@ class TestTextStripper
         assertFalse(bFail);
     }
 
-    private class PDFTabulaTextStripper extends PDFTextStripper
+    private static class PDFTabulaTextStripper extends PDFTextStripper
     {
         PDFTabulaTextStripper() throws IOException
         {

@@ -381,7 +381,7 @@ class TestFontEmbedding
         }
     }
 
-    private class TrueTypeEmbedderTester extends TrueTypeEmbedder
+    private static class TrueTypeEmbedderTester extends TrueTypeEmbedder
     {
 
         /**
