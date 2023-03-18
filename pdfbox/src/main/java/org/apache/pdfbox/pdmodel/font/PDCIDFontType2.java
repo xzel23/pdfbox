@@ -337,7 +337,7 @@ public class PDCIDFontType2 extends PDCIDFont
     public float getHeight(int code) throws IOException
     {
         // todo: really we want the BBox, (for text extraction:)
-        return (ttf.getHorizontalHeader().getAscender() + -ttf.getHorizontalHeader().getDescender())
+        return (ttf.getHorizontalHeader().getAscender() - ttf.getHorizontalHeader().getDescender())
                 / ttf.getUnitsPerEm(); // todo: shouldn't this be the yMax/yMin?
     }
 
