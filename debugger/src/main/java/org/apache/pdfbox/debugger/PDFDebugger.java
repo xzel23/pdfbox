@@ -850,16 +850,12 @@ public class PDFDebugger extends JFrame implements Callable<Integer>
         {
             COSDictionary dict = (COSDictionary) selectedNode;
             COSBase typeItem = dict.getItem(COSName.TYPE);
-            if (COSName.PAGE.equals(typeItem))
-            {
-                return true;
-            }
+            return COSName.PAGE.equals(typeItem);
         }
-        else if (selectedNode instanceof PageEntry)
+        else
         {
-            return true;
+            return selectedNode instanceof PageEntry;
         }
-        return false;
     }
 
     private boolean isFlagNode(Object selectedNode, Object parentNode)

@@ -446,10 +446,7 @@ public abstract class PDSimpleFont extends PDFont
         if (dict.containsKey(COSName.WIDTHS))
         {
             int firstChar = dict.getInt(COSName.FIRST_CHAR, -1);
-            if (code >= firstChar && code - firstChar < getWidths().size())
-            {
-                return true;
-            }
+            return code >= firstChar && code - firstChar < getWidths().size();
         }
         return false;
     }

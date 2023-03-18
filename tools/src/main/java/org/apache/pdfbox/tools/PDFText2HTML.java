@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -362,7 +363,7 @@ public class PDFText2HTML extends PDFTextStripper
             {
                 String tag = stateList.get(i);
                 tagsBuilder.append(closeTag(tag));
-                if (endTag != null && tag.equals(endTag))
+                if (Objects.equals(tag, endTag))
                 {
                     return i;
                 }

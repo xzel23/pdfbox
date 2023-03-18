@@ -16,6 +16,7 @@
  */
 package org.apache.pdfbox.pdmodel.font;
 
+import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -376,24 +377,14 @@ final class FontMapperImpl implements FontMapper
      */
     private FontBoxFont findFontBoxFont(String postScriptName)
     {
-        Type1Font t1 = (Type1Font)findFont(FontFormat.PFB, postScriptName);
-        if (t1 != null)
+        for (FontFormat format: FontFormat.values())
         {
-            return t1;
+            FontBoxFont font = findFont(FontFormat.PFB, postScriptName);
+            if (font != null)
+            {
+                return font;
+            }
         }
-
-        TrueTypeFont ttf = (TrueTypeFont)findFont(FontFormat.TTF, postScriptName);
-        if (ttf != null)
-        {
-            return ttf;
-        }
-
-        OpenTypeFont otf = (OpenTypeFont) findFont(FontFormat.OTF, postScriptName);
-        if (otf != null)
-        {
-            return otf;
-        }
-
         return null;
     }
 

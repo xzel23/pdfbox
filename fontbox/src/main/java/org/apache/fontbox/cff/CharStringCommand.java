@@ -269,23 +269,15 @@ public class CharStringCommand
     @Override
     public boolean equals(Object object)
     {
-        if (object instanceof CharStringCommand)
+        if (!(object instanceof CharStringCommand))
         {
-            CharStringCommand that = (CharStringCommand) object;
-            if (type1KeyWord != null && type1KeyWord.equals(that.getType1KeyWord()))
-            {
-                return true;
-            }
-            if (type2KeyWord != null && type2KeyWord.equals(that.getType2KeyWord()))
-            {
-                return true;
-            }
-            if (type1KeyWord == null && type2KeyWord == null)
-            {
-                return true;
-            }
+            return false;
         }
-        return false;
+
+        CharStringCommand that = (CharStringCommand) object;
+        return type1KeyWord == that.getType1KeyWord()
+                || type2KeyWord == that.getType2KeyWord()
+                || type1KeyWord == null && type2KeyWord == null;
     }
 
     /**

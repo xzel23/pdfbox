@@ -212,7 +212,7 @@ public class AddValidationInformation
     {
         T result;
         COSBase element = parent.getDictionaryObject(name);
-        if (element != null && clazz.isInstance(element))
+        if (clazz.isInstance(element))
         {
             result = clazz.cast(element);
             result.setNeedToBeUpdated(true);

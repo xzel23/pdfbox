@@ -21,6 +21,8 @@ import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.common.PDDictionaryWrapper;
 
+import java.util.Objects;
+
 /**
  * A user property.
  * 
@@ -209,18 +211,7 @@ public class PDUserProperty extends PDDictionaryWrapper
             return false;
         }
         PDUserProperty other = (PDUserProperty) obj;
-        if (userAttributeObject == null)
-        {
-            if (other.userAttributeObject != null)
-            {
-                return false;
-            }
-        }
-        else if (!userAttributeObject.equals(other.userAttributeObject))
-        {
-            return false;
-        }
-        return true;
+        return Objects.equals(userAttributeObject, other.userAttributeObject);
     }
 
 }

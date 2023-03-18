@@ -143,17 +143,13 @@ abstract class TrueTypeEmbedder implements Subsetter
             int fsType = ttf.getOS2Windows().getFsType();
             int maskedFsType = fsType & 0x000F;
             // PDFBOX-5191: don't check the bit because permissions are exclusive
+            // bitmap embedding only
             if (maskedFsType == OS2WindowsMetricsTable.FSTYPE_RESTRICTED)
             {
                 // restricted License embedding
                 return false;
             }
-            else if ((fsType & OS2WindowsMetricsTable.FSTYPE_BITMAP_ONLY) ==
-                                 OS2WindowsMetricsTable.FSTYPE_BITMAP_ONLY)
-            {
-                // bitmap embedding only
-                return false;
-            }
+            else return (fsType & OS2WindowsMetricsTable.FSTYPE_BITMAP_ONLY) != OS2WindowsMetricsTable.FSTYPE_BITMAP_ONLY;
         }
         return true;
     }
@@ -166,11 +162,7 @@ abstract class TrueTypeEmbedder implements Subsetter
         if (ttf.getOS2Windows() != null)
         {
             int fsType = ttf.getOS2Windows().getFsType();
-            if ((fsType & OS2WindowsMetricsTable.FSTYPE_NO_SUBSETTING) ==
-                          OS2WindowsMetricsTable.FSTYPE_NO_SUBSETTING)
-            {
-                return false;
-            }
+            return (fsType & OS2WindowsMetricsTable.FSTYPE_NO_SUBSETTING) != OS2WindowsMetricsTable.FSTYPE_NO_SUBSETTING;
         }
         return true;
     }
