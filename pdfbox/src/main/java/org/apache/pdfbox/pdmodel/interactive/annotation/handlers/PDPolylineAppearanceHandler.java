@@ -121,7 +121,7 @@ public class PDPolylineAppearanceHandler extends PDAbstractAppearanceHandler
                         float x1 = pathsArray[2];
                         float y1 = pathsArray[3];
                         float len = (float) (Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2)));
-                        if (Float.compare(len, 0) != 0)
+                        if (len != 0)
                         {
                             x += (x1 - x) / len * ab.width;
                             y += (y1 - y) / len * ab.width;
@@ -139,7 +139,7 @@ public class PDPolylineAppearanceHandler extends PDAbstractAppearanceHandler
                         float x0 = pathsArray[pathsArray.length - 4];
                         float y0 = pathsArray[pathsArray.length - 3];
                         float len = (float) (Math.sqrt(Math.pow(x0 - x, 2) + Math.pow(y0 - y, 2)));
-                        if (Float.compare(len, 0) != 0)
+                        if (len != 0)
                         {
                             x -= (x - x0) / len * ab.width;
                             y -= (y - y0) / len * ab.width;

@@ -72,7 +72,7 @@ class AnnotationBorder
             boolean allZero = true;
             for (float f : ab.dashArray)
             {
-                if (Float.compare(f, 0) != 0)
+                if (f != 0)
                 {
                     allZero = false;
                     break;

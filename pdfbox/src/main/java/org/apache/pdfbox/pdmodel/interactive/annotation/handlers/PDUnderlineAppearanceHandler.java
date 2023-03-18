@@ -114,7 +114,7 @@ public class PDUnderlineAppearanceHandler extends PDAbstractAppearanceHandler
                                       Math.pow(pathsArray[i * 8 + 1] - pathsArray[i * 8 + 5], 2)));
                 float x0 = pathsArray[i * 8 + 4];
                 float y0 = pathsArray[i * 8 + 5];
-                if (Float.compare(len0, 0) != 0)
+                if (len0 != 0)
                 {
                     // only if both coordinates are not identical to avoid divide by zero
                     x0 += (pathsArray[i * 8] - pathsArray[i * 8 + 4]) / len0 * len0 / 7;
@@ -124,7 +124,7 @@ public class PDUnderlineAppearanceHandler extends PDAbstractAppearanceHandler
                                       Math.pow(pathsArray[i * 8 + 3] - pathsArray[i * 8 + 7], 2)));
                 float x1 = pathsArray[i * 8 + 6];
                 float y1 = pathsArray[i * 8 + 7];
-                if (Float.compare(len1, 0) != 0)
+                if (len1 != 0)
                 {
                     // only if both coordinates are not identical to avoid divide by zero
                     x1 += (pathsArray[i * 8 + 2] - pathsArray[i * 8 + 6]) / len1 * len1 / 7;
