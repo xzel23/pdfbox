@@ -66,14 +66,17 @@ public final class Matrix implements Cloneable
      */
     private Matrix(COSArray array)
     {
-        single = new float[SIZE];
-        single[0] = ((COSNumber)array.getObject(0)).floatValue();
-        single[1] = ((COSNumber)array.getObject(1)).floatValue();
-        single[3] = ((COSNumber)array.getObject(2)).floatValue();
-        single[4] = ((COSNumber)array.getObject(3)).floatValue();
-        single[6] = ((COSNumber)array.getObject(4)).floatValue();
-        single[7] = ((COSNumber)array.getObject(5)).floatValue();
-        single[8] = 1;
+        single = new float[] {
+                ((COSNumber)array.getObject(0)).floatValue(),
+                ((COSNumber)array.getObject(1)).floatValue(),
+                0,
+                ((COSNumber)array.getObject(2)).floatValue(),
+                ((COSNumber)array.getObject(3)).floatValue(),
+                0,
+                ((COSNumber)array.getObject(4)).floatValue(),
+                ((COSNumber)array.getObject(5)).floatValue(),
+                1
+        };
     }
 
     /**
@@ -100,14 +103,7 @@ public final class Matrix implements Cloneable
      */
     public Matrix(float a, float b, float c, float d, float e, float f)
     {
-        single = new float[SIZE];
-        single[0] = a;
-        single[1] = b;
-        single[3] = c;
-        single[4] = d;
-        single[6] = e;
-        single[7] = f;
-        single[8] = 1;
+        single = new float[] { a, b, 0, c, d, 0, e, f, 1 };
     }
 
     /**
@@ -121,14 +117,11 @@ public final class Matrix implements Cloneable
      */
     public Matrix(AffineTransform at)
     {
-        single = new float[SIZE];
-        single[0] = (float)at.getScaleX();
-        single[1] = (float)at.getShearY();
-        single[3] = (float)at.getShearX();
-        single[4] = (float)at.getScaleY();
-        single[6] = (float)at.getTranslateX();
-        single[7] = (float)at.getTranslateY();
-        single[8] = 1;
+        single = new float[] {
+                (float)at.getScaleX(),     (float)at.getShearY(),     0,
+                (float)at.getShearX(),     (float)at.getScaleY(),     0,
+                (float)at.getTranslateX(), (float)at.getTranslateY(), 1
+        };
     }
 
     /**
