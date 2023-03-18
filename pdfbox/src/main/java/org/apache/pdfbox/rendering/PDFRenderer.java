@@ -285,7 +285,7 @@ public class PDFRenderer
         int heightPx = (int) Math.max(Math.floor(heightPt * scale), 1);
 
         // PDFBOX-4518 the maximum size (w*h) of a buffered image is limited to Integer.MAX_VALUE
-        if ((long) widthPx * (long) heightPx > Integer.MAX_VALUE)
+        if ((long) widthPx * heightPx > Integer.MAX_VALUE)
         {
             throw new IOException("Maximum size of image exceeded (w * h * scale ^ 2) = "//
                     + widthPt + " * " + heightPt + " * " + scale + " ^ 2 > " + Integer.MAX_VALUE);
