@@ -58,7 +58,7 @@ class TestCOSFloat extends TestCOSNumber
      * runTests for a series of random and pseudorandom tests, or runTest to
      * test with corner values.
      */
-    abstract class BaseTester
+    abstract static class BaseTester
     {
         private int low = -100000;
         private int high = 300000;
