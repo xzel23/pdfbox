@@ -393,7 +393,7 @@ class AppearanceGeneratorHelper
     
                 if (lineWidth > 0 && borderColour != null)
                 {
-                    if (Float.compare(lineWidth, 1) != 0)
+                    if (lineWidth != 1)
                     {
                         contents.setLineWidth(lineWidth);
                     }

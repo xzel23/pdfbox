@@ -87,7 +87,7 @@ public class BlendMode
 
     private static final BlendChannelFunction fColorBurn = (src, dest) -> {
         // See PDF 2.0 specification
-        if (Float.compare(dest, 1) == 0)
+        if (dest == 1)
         {
             return 1f;
         }

@@ -363,7 +363,7 @@ public class PDTrueTypeFont extends PDSimpleFont implements PDVectorFont
         int gid = codeToGID(code);
         float width = ttf.getAdvanceWidth(gid);
         float unitsPerEM = ttf.getUnitsPerEm();
-        if (Float.compare(unitsPerEM, 1000) != 0)
+        if (unitsPerEM != 1000)
         {
             width *= 1000f / unitsPerEM;
         }
