@@ -138,7 +138,7 @@ public class AxialShadingContext extends ShadingContext
     private int[] calcColorTable() throws IOException
     {
         int[] map = new int[factor + 1];
-        if (factor == 0 || Float.compare(d1d0, 0) == 0)
+        if (factor == 0 || d1d0 == 0)
         {
             float[] values = axialShadingType.evalFunction(domain[0]);
             map[0] = convertToRGB(values);

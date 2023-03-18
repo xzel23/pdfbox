@@ -403,7 +403,7 @@ public final class TextPosition
     {
         float dir = getDir();
         // some PDFBox code assumes that the 0,0 point is in upper left, not lower left
-        if (Float.compare(dir, 0) == 0 || Float.compare(dir, 180) == 0)
+        if (dir == 0 || dir == 180)
         {
             return pageHeight - getYLowerLeftRot(dir);
         }
@@ -421,7 +421,7 @@ public final class TextPosition
      */
     private float getWidthRot(float rotation)
     {
-        if (Float.compare(rotation, 90) == 0 || Float.compare(rotation, 270) == 0)
+        if (rotation == 90 || rotation == 270)
         {
             return Math.abs(endY - textMatrix.getTranslateY());
         }

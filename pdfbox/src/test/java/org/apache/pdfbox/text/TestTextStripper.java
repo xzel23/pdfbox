@@ -640,8 +640,8 @@ class TestTextStripper
             if (fontDescriptor != null)
             {
                 float capHeight = fontDescriptor.getCapHeight();
-                if (Float.compare(capHeight, 0) != 0
-                        && (capHeight < glyphHeight || Float.compare(glyphHeight, 0) == 0))
+                if (capHeight != 0
+                        && (capHeight < glyphHeight || glyphHeight == 0))
                 {
                     glyphHeight = capHeight;
                 }
@@ -650,7 +650,7 @@ class TestTextStripper
                 float ascent = fontDescriptor.getAscent();
                 float descent = fontDescriptor.getDescent();
                 if (ascent > 0 && descent < 0
-                        && ((ascent - descent) / 2 < glyphHeight || Float.compare(glyphHeight, 0) == 0))
+                        && ((ascent - descent) / 2 < glyphHeight || glyphHeight == 0))
                 {
                     glyphHeight = (ascent - descent) / 2;
                 }
