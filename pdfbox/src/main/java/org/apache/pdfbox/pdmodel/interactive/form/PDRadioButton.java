@@ -134,7 +134,7 @@ public final class PDRadioButton extends PDButton
             int idx = 0;
             for (String onValue : getOnValues())
             {
-                if (onValue.compareTo(fieldValue) == 0)
+                if (onValue.equals(fieldValue))
                 {
                     selectedExportValues.add(exportValues.get(idx));
                 }
