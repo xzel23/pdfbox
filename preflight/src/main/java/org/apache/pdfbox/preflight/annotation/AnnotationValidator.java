@@ -109,7 +109,7 @@ public abstract class AnnotationValidator
         if (ca instanceof COSFloat)
         {
             float caf = ((COSFloat) ca).floatValue();
-            if (Float.compare(caf, 1.0f) != 0)
+            if (caf != 1.0f)
             { // ---- Only 1.0 is authorized as value
                 ctx.addValidationError(new ValidationError(ERROR_ANNOT_INVALID_CA,
                         "CA entry is invalid. Expected 1.0 / Read " + caf));

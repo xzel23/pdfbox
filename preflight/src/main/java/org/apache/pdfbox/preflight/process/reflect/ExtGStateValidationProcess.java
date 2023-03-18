@@ -256,7 +256,7 @@ public class ExtGStateValidationProcess extends AbstractProcess
             // ---- If CA is present only the value 1.0 is authorized
             Float fca = uCA instanceof COSFloat ? ((COSFloat) uCA).floatValue() : null;
             Integer ica = uCA instanceof COSInteger ? ((COSInteger) uCA).intValue() : null;
-            if (!(fca != null && Float.compare(fca, 1.0f) == 0) && !(ica != null && ica == 1))
+            if (!(fca != null && fca == 1.0f) && !(ica != null && ica == 1))
             {
                 context.addValidationError(new ValidationError(ERROR_TRANSPARENCY_EXT_GS_CA,
                         "CA entry in a ExtGState is invalid"));
@@ -279,7 +279,7 @@ public class ExtGStateValidationProcess extends AbstractProcess
             // ---- If ca is present only the value 1.0 is authorized
             Float fca = lCA instanceof COSFloat ? ((COSFloat) lCA).floatValue() : null;
             Integer ica = lCA instanceof COSInteger ? ((COSInteger) lCA).intValue() : null;
-            if (!(fca != null && Float.compare(fca, 1.0f) == 0) && !(ica != null && ica == 1))
+            if (!(fca != null && fca == 1.0f) && !(ica != null && ica == 1))
             {
                 context.addValidationError(new ValidationError(ERROR_TRANSPARENCY_EXT_GS_CA,
                         "ca entry in a ExtGState is invalid"));

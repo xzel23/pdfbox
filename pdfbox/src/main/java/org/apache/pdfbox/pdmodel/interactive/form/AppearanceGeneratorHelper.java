@@ -556,7 +556,7 @@ class AppearanceGeneratorHelper
                 // Adobe shows the text 'shifted up' in case the caps don't fit into the clipping area
                 if (fontCapAtSize > clipRect.getHeight())
                 {
-                    y = clipRect.getLowerLeftY() + -fontDescentAtSize;
+                    y = clipRect.getLowerLeftY() - fontDescentAtSize;
                 }
                 else
                 {
@@ -900,8 +900,8 @@ class AppearanceGeneratorHelper
                 float widthBasedFontSize = contentRect.getWidth() / width * xScalingFactor;
 
                 // fit height
-                float height = (font.getFontDescriptor().getCapHeight() +
-                               -font.getFontDescriptor().getDescent()) * font.getFontMatrix().getScaleY();
+                float height = (font.getFontDescriptor().getCapHeight() -
+                        font.getFontDescriptor().getDescent()) * font.getFontMatrix().getScaleY();
                 if (height <= 0)
                 {
                     height = font.getBoundingBox().getHeight() * font.getFontMatrix().getScaleY();

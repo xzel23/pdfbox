@@ -69,12 +69,12 @@ public class PostScriptTable extends TTFTable
         mimMemType1 = data.readUnsignedInt();
         maxMemType1 = data.readUnsignedInt();
 
-        if (Float.compare(formatType, 1.0f) == 0)
+        if (formatType == 1.0f)
         {
             // This TrueType font file contains exactly the 258 glyphs in the standard Macintosh TrueType.
             glyphNames = WGL4Names.getAllNames();
         }
-        else if (Float.compare(formatType, 2.0f) == 0)
+        else if (formatType == 2.0f)
         {
             int numGlyphs = data.readUnsignedShort();
             int[] glyphNameIndex = new int[numGlyphs];
@@ -134,7 +134,7 @@ public class PostScriptTable extends TTFTable
                 }
             }
         }
-        else if (Float.compare(formatType, 2.5f) == 0)
+        else if (formatType == 2.5f)
         {
             int[] glyphNameIndex = new int[ttf.getNumberOfGlyphs()];
             for (int i = 0; i < glyphNameIndex.length; i++)
@@ -161,7 +161,7 @@ public class PostScriptTable extends TTFTable
                 }
             }
         }
-        else if (Float.compare(formatType, 3.0f) == 0)
+        else if (formatType == 3.0f)
         {
             // no postscript information is provided.
             LOG.debug("No PostScript name information is provided for the font " + ttf.getName());
