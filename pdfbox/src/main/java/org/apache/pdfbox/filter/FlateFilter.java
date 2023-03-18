@@ -26,7 +26,6 @@ import java.util.zip.Inflater;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pdfbox.cos.COSDictionary;
-import org.apache.pdfbox.io.IOUtils;
 
 /**
  * Decompresses data encoded using the zlib/deflate compression method,

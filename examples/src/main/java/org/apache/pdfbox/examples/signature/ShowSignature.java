@@ -55,7 +55,6 @@ import org.apache.pdfbox.cos.COSStream;
 import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.examples.signature.cert.CertificateVerificationException;
 import org.apache.pdfbox.examples.signature.cert.CertificateVerifier;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.io.RandomAccessReadBufferedFile;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;

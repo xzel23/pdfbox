@@ -24,7 +24,6 @@ import org.bouncycastle.cms.CMSTypedData;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.apache.pdfbox.io.IOUtils;
 
 /**
  * Wraps a InputStream into a CMSProcessable object for bouncy castle. It's a memory saving

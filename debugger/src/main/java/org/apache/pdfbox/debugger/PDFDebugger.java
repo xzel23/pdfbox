@@ -125,7 +125,6 @@ import org.apache.pdfbox.debugger.ui.XrefEntries;
 import org.apache.pdfbox.debugger.ui.XrefEntry;
 import org.apache.pdfbox.debugger.ui.ZoomMenu;
 import org.apache.pdfbox.filter.FilterFactory;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.common.PDPageLabels;

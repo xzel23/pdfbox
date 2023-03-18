@@ -32,7 +32,6 @@ import java.util.function.BiConsumer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.common.COSObjectable;
 import org.apache.pdfbox.util.DateConverter;
 import org.apache.pdfbox.util.SmallMap;

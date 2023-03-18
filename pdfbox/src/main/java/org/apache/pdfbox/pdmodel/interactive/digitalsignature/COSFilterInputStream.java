@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-import org.apache.pdfbox.io.IOUtils;
-
 /**
  * A filtered stream that includes the bytes that are in the (begin,length) intervals passed in the
  * constructor.

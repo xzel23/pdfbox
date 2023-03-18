@@ -28,7 +28,6 @@ import java.util.Random;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
 /**

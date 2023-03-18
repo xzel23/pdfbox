@@ -47,17 +47,14 @@ public class RandomAccessReadBufferedFile implements RandomAccessRead
     private ByteBuffer lastRemovedCachePage = null;
 
     /** Create a LRU page cache. */
-    private final Map<Long, ByteBuffer> pageCache = new LinkedHashMap<Long, ByteBuffer>(
-            MAX_CACHED_PAGES, 0.75f, true)
-    {
+    private final Map<Long, ByteBuffer> pageCache = new LinkedHashMap<>(
+            MAX_CACHED_PAGES, 0.75f, true) {
         private static final long serialVersionUID = -6302488539257741101L;
 
         @Override
-        protected boolean removeEldestEntry(Map.Entry<Long, ByteBuffer> eldest)
-        {
+        protected boolean removeEldestEntry(Map.Entry<Long, ByteBuffer> eldest) {
             final boolean doRemove = size() > MAX_CACHED_PAGES;
-            if (doRemove)
-            {
+            if (doRemove) {
                 lastRemovedCachePage = eldest.getValue();
                 lastRemovedCachePage.clear();
             }
