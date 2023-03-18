@@ -242,7 +242,7 @@ public abstract class PDCIDFont implements COSObjectable, PDFontLike, PDVectorFo
      */
     private float getDefaultWidth()
     {
-        if (Float.compare(defaultWidth, 0) == 0)
+        if (defaultWidth == 0)
         {
             COSBase base = dict.getDictionaryObject(COSName.DW);
             if (base instanceof COSNumber)
@@ -325,7 +325,7 @@ public abstract class PDCIDFont implements COSObjectable, PDFontLike, PDVectorFo
     // todo: this method is highly suspicious, the average glyph width is not usually a good metric
     public float getAverageFontWidth()
     {
-        if (Float.compare(averageWidth, 0) == 0)
+        if (averageWidth == 0)
         {
             float totalWidths = 0.0f;
             int characterCount = 0;

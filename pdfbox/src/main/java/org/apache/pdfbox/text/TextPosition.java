@@ -288,7 +288,7 @@ public final class TextPosition
      */
     private float getXRot(float rotation)
     {
-        if (Float.compare(rotation, 0) == 0)
+        if (rotation == 0)
         {
             return textMatrix.getTranslateX();
         }
@@ -351,7 +351,7 @@ public final class TextPosition
      */
     private float getYLowerLeftRot(float rotation)
     {
-        if (Float.compare(rotation, 0) == 0)
+        if (rotation == 0)
         {
             return textMatrix.getTranslateY();
         }

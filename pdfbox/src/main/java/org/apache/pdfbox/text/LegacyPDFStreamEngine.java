@@ -258,13 +258,13 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
             LOG.warn(exception, exception);
         }
 
-        if (Float.compare(spaceWidthText, 0) == 0)
+        if (spaceWidthText == 0)
         {
             spaceWidthText = font.getAverageFontWidth() * glyphSpaceToTextSpaceFactor;
             // the average space width appears to be higher than necessary so make it smaller
             spaceWidthText *= .80f;
         }
-        if (Float.compare(spaceWidthText, 0) == 0)
+        if (spaceWidthText == 0)
         {
             spaceWidthText = 1.0f; // if could not find font, use a generic value
         }

@@ -508,7 +508,7 @@ class AppearanceGeneratorHelper
             // calculate the fontSize (because 0 = autosize)
             float fontSize = defaultAppearance.getFontSize();
             
-            if (Float.compare(fontSize, 0) == 0)
+            if (fontSize == 0)
             {
                 fontSize = calculateFontSize(font, contentRect);
             }
@@ -855,7 +855,7 @@ class AppearanceGeneratorHelper
         float fontSize = defaultAppearance.getFontSize();
         
         // zero is special, it means the text is auto-sized
-        if (Float.compare(fontSize, 0) == 0)
+        if (fontSize == 0)
         {
             if (isMultiLine())
             {
