@@ -1118,7 +1118,7 @@ class TestCreateSignature
             signature.setSignDate(cal);
 
             doc.addSignature(signature);
-            doc.setDocumentId(12345l);
+            doc.setDocumentId(12345L);
             ExternalSigningSupport externalSigning = doc.saveIncrementalForExternalSigning(baos);
             // invoke external signature service
             return IOUtils.toByteArray(externalSigning.getContent());

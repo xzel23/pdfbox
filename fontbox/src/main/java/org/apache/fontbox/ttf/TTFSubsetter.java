@@ -916,7 +916,7 @@ public final class TTFSubsetter
                 if (glyphId <= lastgid)
                 {
                     // copy width and lsb
-                    offset = glyphId * 4l;
+                    offset = glyphId * 4L;
                     lastOffset = copyBytes(is, bos, offset, lastOffset, 4);
                 }
                 else 
@@ -926,14 +926,14 @@ public final class TTFSubsetter
                         // one time only: copy width from lastgid, whose width applies
                         // to all later glyphs
                         needLastGidWidth = false;
-                        offset = lastgid * 4l;
+                        offset = lastgid * 4L;
                         lastOffset = copyBytes(is, bos, offset, lastOffset, 2);
 
                         // then go on with lsb from actual glyph (lsb are individual even in monotype fonts)
                     }
 
                     // copy lsb only, as we are beyond numOfHMetrics
-                    offset = h.getNumberOfHMetrics() * 4l + (glyphId - h.getNumberOfHMetrics()) * 2l;
+                    offset = h.getNumberOfHMetrics() * 4L + (glyphId - h.getNumberOfHMetrics()) * 2L;
                     lastOffset = copyBytes(is, bos, offset, lastOffset, 2);
                 }
             }
