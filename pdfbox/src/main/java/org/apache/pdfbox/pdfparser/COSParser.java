@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,6 +81,7 @@ public class COSParser extends BaseParser implements ICOSParser
     private static final int X = 'x';
 
     private static final int STRMBUFLEN = 2048;
+    private static final Pattern PATTERN_WHITESPACE = Pattern.compile("\\s");
     private final byte[] strmBuf = new byte[ STRMBUFLEN ];
 
     private AccessPermission accessPermission;
@@ -1342,7 +1344,7 @@ public class COSParser extends BaseParser implements ICOSParser
      * Check if all entries of the pages dictionary are present. Those which can't be dereferenced are removed.
      * 
      * @param root the root dictionary of the pdf
-     * @throws java.io.IOException if the page tree root is null
+     * @throws IOException if the page tree root is null
      */
     protected void checkPages(COSDictionary root) throws IOException
     {
@@ -1678,7 +1680,7 @@ public class COSParser extends BaseParser implements ICOSParser
         while(true)
         {
             String currentLine = readLine();
-            String[] splitString = currentLine.split("\\s");
+            String[] splitString = splitOnWhitespace(currentLine);
             if (splitString.length != 2)
             {
                 LOG.warn("Unexpected XRefTable Entry: " + currentLine);
@@ -1721,7 +1723,7 @@ public class COSParser extends BaseParser implements ICOSParser
                 }
                 //Ignore table contents
                 currentLine = readLine();
-                splitString = currentLine.split("\\s");
+                splitString = splitOnWhitespace(currentLine);
                 if (splitString.length < 3)
                 {
                     LOG.warn("invalid xref line: " + currentLine);
@@ -1761,6 +1763,10 @@ public class COSParser extends BaseParser implements ICOSParser
             }
         }
         return true;
+    }
+
+    private static String[] splitOnWhitespace(String currentLine) {
+        return PATTERN_WHITESPACE.split(currentLine);
     }
 
     /**
