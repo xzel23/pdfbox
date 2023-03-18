@@ -27,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Set;
 import org.apache.commons.logging.Log;
@@ -220,14 +221,7 @@ final class FontMapperImpl implements FontMapper
     private List<String> getSubstitutes(String postScriptName)
     {
         List<String> subs = substitutes.get(postScriptName.replace(" ", "").toLowerCase(Locale.ENGLISH));
-        if (subs != null)
-        {
-            return subs;
-        }
-        else
-        {
-            return Collections.emptyList();
-        }
+        return Objects.requireNonNullElse(subs, Collections.emptyList());
     }
 
     /**

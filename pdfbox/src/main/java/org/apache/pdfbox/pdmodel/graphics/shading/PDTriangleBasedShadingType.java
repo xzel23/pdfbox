@@ -20,6 +20,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import javax.imageio.stream.ImageInputStream;
 
@@ -244,11 +245,7 @@ abstract class PDTriangleBasedShadingType extends PDShading
             bounds.add(shadedTriangle.corner[1]);
             bounds.add(shadedTriangle.corner[2]);
         }
-        if (bounds == null)
-        {
-            // Speeds up files where triangles are empty, e.g. ghostscript file 690425
-            return new Rectangle2D.Float();
-        }
-        return bounds;
+        // Speeds up files where triangles are empty, e.g. ghostscript file 690425
+        return Objects.requireNonNullElseGet(bounds, Rectangle2D.Float::new);
     }
 }

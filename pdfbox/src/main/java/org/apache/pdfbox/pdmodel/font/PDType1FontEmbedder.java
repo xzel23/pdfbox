@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import org.apache.fontbox.afm.FontMetrics;
 import org.apache.fontbox.encoding.BuiltInEncoding;
 import org.apache.fontbox.pfb.PfbParser;
@@ -62,15 +64,8 @@ class PDType1FontEmbedder
         byte[] pfbBytes = pfbStream.readAllBytes();
         PfbParser pfbParser = new PfbParser(pfbBytes);
         type1 = Type1Font.createWithPFB(pfbBytes);
-        
-        if (encoding == null)
-        {
-            fontEncoding = Type1Encoding.fromFontBox(type1.getEncoding());
-        }
-        else
-        {
-            fontEncoding = encoding;
-        }
+
+        fontEncoding = Objects.requireNonNullElseGet(encoding, () -> Type1Encoding.fromFontBox(type1.getEncoding()));
 
         // build font descriptor
         PDFontDescriptor fd = buildFontDescriptor(type1);

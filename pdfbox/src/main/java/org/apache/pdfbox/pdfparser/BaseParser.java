@@ -451,119 +451,102 @@ public abstract class BaseParser
             char ch = (char)c;
             int nextc = -2; // not yet read
 
-            if (ch == ')')
-            {
+            switch (ch) {
+                case ')':
 
-                braces--;
-                braces = checkForEndOfString(braces);
-                if( braces != 0 )
-                {
-                    out.write(ch);
-                }
-            }
-            else if (ch == '(')
-            {
-                braces++;
-                out.write(ch);
-            }
-            else if( ch == '\\' )
-            {
-                //patched by ram
-                char next = (char) source.read();
-                switch(next)
-                {
-                    case 'n':
-                        out.write('\n');
-                        break;
-                    case 'r':
-                        out.write('\r');
-                        break;
-                    case 't':
-                        out.write('\t');
-                        break;
-                    case 'b':
-                        out.write('\b');
-                        break;
-                    case 'f':
-                        out.write('\f');
-                        break;
-                    case ')':
-                        // PDFBox 276 /Title (c:\)
+                    braces--;
                     braces = checkForEndOfString(braces);
-                        if( braces != 0 )
-                        {
-                            out.write(next);
-                        }
-                        else
-                        {
-                            out.write('\\');
-                        }
-                        break;
-                    case '(':
-                    case '\\':
-                        out.write(next);
-                        break;
-                    case ASCII_LF:
-                    case ASCII_CR:
-                        //this is a break in the line so ignore it and the newline and continue
-                        c = source.read();
-                        while( isEOL(c) && c != -1)
-                        {
-                            c = source.read();
-                        }
-                        nextc = c;
-                        break;
-                    case '0':
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                    case '5':
-                    case '6':
-                    case '7':
-                        StringBuilder octal = new StringBuilder();
-                        octal.append( next );
-                        c = source.read();
-                        char digit = (char)c;
-                        if( digit >= '0' && digit <= '7' )
-                        {
-                            octal.append( digit );
-                            c = source.read();
-                            digit = (char)c;
-                            if( digit >= '0' && digit <= '7' )
-                            {
-                                octal.append( digit );
+                    if (braces != 0) {
+                        out.write(ch);
+                    }
+                    break;
+                case '(':
+                    braces++;
+                    out.write(ch);
+                    break;
+                case '\\':
+                    //patched by ram
+                    char next = (char) source.read();
+                    switch (next) {
+                        case 'n':
+                            out.write('\n');
+                            break;
+                        case 'r':
+                            out.write('\r');
+                            break;
+                        case 't':
+                            out.write('\t');
+                            break;
+                        case 'b':
+                            out.write('\b');
+                            break;
+                        case 'f':
+                            out.write('\f');
+                            break;
+                        case ')':
+                            // PDFBox 276 /Title (c:\)
+                            braces = checkForEndOfString(braces);
+                            if (braces != 0) {
+                                out.write(next);
+                            } else {
+                                out.write('\\');
                             }
-                            else
-                            {
+                            break;
+                        case '(':
+                        case '\\':
+                            out.write(next);
+                            break;
+                        case ASCII_LF:
+                        case ASCII_CR:
+                            //this is a break in the line so ignore it and the newline and continue
+                            c = source.read();
+                            while (isEOL(c) && c != -1) {
+                                c = source.read();
+                            }
+                            nextc = c;
+                            break;
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                            StringBuilder octal = new StringBuilder();
+                            octal.append(next);
+                            c = source.read();
+                            char digit = (char) c;
+                            if (digit >= '0' && digit <= '7') {
+                                octal.append(digit);
+                                c = source.read();
+                                digit = (char) c;
+                                if (digit >= '0' && digit <= '7') {
+                                    octal.append(digit);
+                                } else {
+                                    nextc = c;
+                                }
+                            } else {
                                 nextc = c;
                             }
-                        }
-                        else
-                        {
-                            nextc = c;
-                        }
-    
-                        int character = 0;
-                        try
-                        {
-                            character = Integer.parseInt( octal.toString(), 8 );
-                        }
-                        catch( NumberFormatException e )
-                        {
-                            throw new IOException( "Error: Expected octal character, actual='" + octal + "'", e );
-                        }
-                        out.write(character);
-                        break;
-                    default:
-                        // dropping the backslash
-                        // see 7.3.4.2 Literal Strings for further information
-                        out.write(next);
-                }
-            }
-            else
-            {
-                out.write(ch);
+
+                            int character = 0;
+                            try {
+                                character = Integer.parseInt(octal.toString(), 8);
+                            } catch (NumberFormatException e) {
+                                throw new IOException("Error: Expected octal character, actual='" + octal + "'", e);
+                            }
+                            out.write(character);
+                            break;
+                        default:
+                            // dropping the backslash
+                            // see 7.3.4.2 Literal Strings for further information
+                            out.write(next);
+                    }
+                    break;
+                default:
+                    out.write(ch);
+                    break;
             }
             if (nextc != -2)
             {
