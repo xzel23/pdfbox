@@ -231,7 +231,7 @@ public class XmpSerializer
             boolean matchesField = false;
             for (AbstractField field : fields)
             {
-                if (attribute.getName().compareTo(field.getPropertyName()) == 0)
+                if (attribute.getName().equals(field.getPropertyName()))
                 {
                     matchesField = true;
                     break;

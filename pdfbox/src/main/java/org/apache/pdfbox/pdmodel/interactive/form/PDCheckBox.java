@@ -63,7 +63,7 @@ public final class PDCheckBox extends PDButton
      */
     public boolean isChecked()
     {
-        return getValue().compareTo(getOnValue()) == 0;
+        return getValue().equals(getOnValue());
     }
 
     /**

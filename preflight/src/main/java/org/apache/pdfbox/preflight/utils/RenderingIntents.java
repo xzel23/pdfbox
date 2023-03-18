@@ -21,8 +21,6 @@
 
 package org.apache.pdfbox.preflight.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.pdfbox.cos.COSName;
