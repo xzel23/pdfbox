@@ -462,18 +462,16 @@ public class CMap
         cmap.codespaceRanges.forEach(this::addCodespaceRange);
         charToUnicodeOneByte.putAll(cmap.charToUnicodeOneByte);
         charToUnicodeTwoBytes.putAll(cmap.charToUnicodeTwoBytes);
-        cmap.charToUnicodeOneByte.forEach((key1, value1) -> unicodeToByteCodes.put(value1, new byte[]{(byte) (key1 % 0xFF)}));
-        cmap.charToUnicodeTwoBytes.forEach((key, value) -> unicodeToByteCodes.put(value,
-                new byte[]{(byte) ((key >>> 8) & 0xFF), (byte) (key & 0xFF)}));
+        cmap.charToUnicodeOneByte.forEach((k, v) -> unicodeToByteCodes.put(v, new byte[]{(byte) (k % 0xFF)}));
+        cmap.charToUnicodeTwoBytes.forEach((k, v) -> unicodeToByteCodes.put(v,
+                new byte[]{(byte) ((k >>> 8) & 0xFF), (byte) (k & 0xFF)})
+        );
         cmap.codeToCid.forEach((key, value) ->
         {
-            if (codeToCid.containsKey(key))
+            Map<Integer, Integer> existingMapping = codeToCid.putIfAbsent(key, value);
+            if (existingMapping!=null)
             {
-                codeToCid.get(key).putAll(value);
-            }
-            else
-            {
-                codeToCid.put(key, value);
+                existingMapping.putAll(value);
             }
         });
         codeToCidRanges.addAll(cmap.codeToCidRanges);
