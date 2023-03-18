@@ -26,7 +26,6 @@ import org.apache.pdfbox.io.RandomAccessStreamCache.StreamCacheCreateFunction;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  * This class contains various I/O-related methods.
