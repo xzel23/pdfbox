@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class COSFloat extends COSNumber
 {
-    private Float value;
+    private float value;
     private String valueAsString;
 
     /**
@@ -156,7 +156,7 @@ public class COSFloat extends COSNumber
     @Override
     public long longValue()
     {
-        return value.longValue();
+        return (long) value;
     }
 
     /**
@@ -167,7 +167,7 @@ public class COSFloat extends COSNumber
     @Override
     public int intValue()
     {
-        return value.intValue();
+        return (int) value;
     }
 
     /**
@@ -186,7 +186,7 @@ public class COSFloat extends COSNumber
     @Override
     public int hashCode()
     {
-        return value.hashCode();
+        return Float.hashCode(value);
     }
 
     /**
