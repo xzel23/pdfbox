@@ -68,7 +68,7 @@ public class SetLineDashPattern extends OperatorProcessor
             if (base instanceof COSNumber)
             {
                 COSNumber num = (COSNumber) base;
-                if (Float.compare(num.floatValue(), 0) != 0)
+                if (num.floatValue() == 0)
                 {
                     break;
                 }

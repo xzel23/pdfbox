@@ -55,7 +55,7 @@ public class PDInkAppearanceHandler extends PDAbstractAppearanceHandler
         }
         // PDF spec does not mention /Border for ink annotations, but it is used if /BS is not available
         AnnotationBorder ab = AnnotationBorder.getAnnotationBorder(ink, ink.getBorderStyle());
-        if (Float.compare(ab.width, 0) == 0)
+        if (ab.width == 0)
         {
             return;
         }

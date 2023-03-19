@@ -389,7 +389,7 @@ public class PDFTextStripper extends LegacyPDFStreamEngine
             
             // adjust for cropbox
             PDRectangle cropBox = page.getCropBox();
-            if (Float.compare(cropBox.getLowerLeftX(), 0) != 0 || Float.compare(cropBox.getLowerLeftY(), 0) != 0)
+            if (cropBox.getLowerLeftX() != 0 || cropBox.getLowerLeftY() != 0)
             {
                 rect.setLowerLeftX(rect.getLowerLeftX() - cropBox.getLowerLeftX());
                 rect.setLowerLeftY(rect.getLowerLeftY() - cropBox.getLowerLeftY());
@@ -538,7 +538,7 @@ public class PDFTextStripper extends LegacyPDFStreamEngine
                 // or a change in the font size
                 if (lastPosition != null &&
                     (position.getFont() != lastPosition.getTextPosition().getFont() || 
-                     Float.compare(position.getFontSize(),lastPosition.getTextPosition().getFontSize()) != 0))
+                     position.getFontSize() != lastPosition.getTextPosition().getFontSize()))
                 {
                     previousAveCharWidth = -1;
                 }
