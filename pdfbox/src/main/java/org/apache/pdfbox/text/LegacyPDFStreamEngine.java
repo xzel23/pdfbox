@@ -141,7 +141,7 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         this.pageRotation = page.getRotation();
         this.pageSize = page.getCropBox();
         
-        if (Float.compare(pageSize.getLowerLeftX(), 0) == 0 && Float.compare(pageSize.getLowerLeftY(), 0) == 0)
+        if (pageSize.getLowerLeftX() == 0 && pageSize.getLowerLeftY() == 0)
         {
             translateMatrix = null;
         }

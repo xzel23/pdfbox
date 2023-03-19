@@ -63,7 +63,7 @@ public class PDStrikeoutAppearanceHandler extends PDAbstractAppearanceHandler
         {
             return;
         }
-        if (Float.compare(ab.width, 0) == 0)
+        if (ab.width == 0)
         {
             // value found in adobe reader
             ab.width = 1.5f;

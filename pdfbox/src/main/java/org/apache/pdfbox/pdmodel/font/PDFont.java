@@ -551,7 +551,7 @@ public abstract class PDFont implements COSObjectable, PDFontLike
      */
     public float getSpaceWidth()
     {
-        if (Float.compare(fontWidthOfSpace, -1f) == 0)
+        if (fontWidthOfSpace == -1)
         {
             try
             {

@@ -848,15 +848,15 @@ public final class TextPosition
 
         TextPosition that = (TextPosition) o;
 
-        if (Float.compare(that.endX, endX) != 0)
+        if (that.endX == endX)
         {
             return false;
         }
-        if (Float.compare(that.endY, endY) != 0)
+        if (that.endY == endY)
         {
             return false;
         }
-        if (Float.compare(that.maxHeight, maxHeight) != 0)
+        if (that.maxHeight == maxHeight)
         {
             return false;
         }
@@ -864,27 +864,27 @@ public final class TextPosition
         {
             return false;
         }
-        if (Float.compare(that.x, x) != 0)
+        if (that.x == x)
         {
             return false;
         }
-        if (Float.compare(that.y, y) != 0)
+        if (that.y == y)
         {
             return false;
         }
-        if (Float.compare(that.pageHeight, pageHeight) != 0)
+        if (that.pageHeight == pageHeight)
         {
             return false;
         }
-        if (Float.compare(that.pageWidth, pageWidth) != 0)
+        if (that.pageWidth == pageWidth)
         {
             return false;
         }
-        if (Float.compare(that.widthOfSpace, widthOfSpace) != 0)
+        if (that.widthOfSpace == widthOfSpace)
         {
             return false;
         }
-        if (Float.compare(that.fontSize, fontSize) != 0)
+        if (that.fontSize == fontSize)
         {
             return false;
         }

@@ -189,10 +189,10 @@ public class PDCIDFontType2 extends PDCIDFont
         {
             PDRectangle bbox = getFontDescriptor().getFontBoundingBox();
             if (bbox != null &&
-                    (Float.compare(bbox.getLowerLeftX(), 0) != 0 || 
-                     Float.compare(bbox.getLowerLeftY(), 0) != 0 ||
-                     Float.compare(bbox.getUpperRightX(), 0) != 0 ||
-                     Float.compare(bbox.getUpperRightY(), 0) != 0))
+                    (bbox.getLowerLeftX() == 0 || 
+                    bbox.getLowerLeftY() != 0 ||
+                    bbox.getUpperRightX() != 0 ||
+                    bbox.getUpperRightY() != 0))
             {
                 return new BoundingBox(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                                        bbox.getUpperRightX(), bbox.getUpperRightY());

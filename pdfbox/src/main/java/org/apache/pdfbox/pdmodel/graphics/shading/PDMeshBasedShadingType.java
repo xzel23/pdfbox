@@ -69,8 +69,8 @@ abstract class PDMeshBasedShadingType extends PDShadingType4
         PDRange rangeX = getDecodeForParameter(0);
         PDRange rangeY = getDecodeForParameter(1);
         if (rangeX == null || rangeY == null ||
-            Float.compare(rangeX.getMin(), rangeX.getMax()) == 0 ||
-            Float.compare(rangeY.getMin(), rangeY.getMax()) == 0)
+            rangeX.getMin() == rangeX.getMax() ||
+            rangeY.getMin() == rangeY.getMax())
         {
             return Collections.emptyList();
         }
