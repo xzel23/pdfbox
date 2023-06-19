@@ -29,14 +29,14 @@
 
     <distributionManagement>
         <repository>
-            <id>dua3-artifactory-repo</id>
-            <name>Dua3 Artifactory Repository</name>
-            <url>https://dua3.jfrog.io/artifactory/default-libs-release-local</url>
+            <id>dua3-repsy-repo</id>
+            <name>Dua3 Repsy Repository</name>
+            <url>https://repo.repsy.io/mvn/dua3/dua3</url>
         </repository>
         <snapshotRepository>
-            <id>dua3-artifactory-repo-snapshots</id>
-            <name>Dua3 Artifactory Snapshot Repository</name>
-            <url>https://dua3.jfrog.io/artifactory/default-libs-snapshot-local</url>
+            <id>dua3-repsy-repo-snapshots</id>
+            <name>Dua3 Repsy Snapshot Repository</name>
+            <url>https://repo.repsy.io/mvn/dua3/dua3-snapshot</url>
         </snapshotRepository>
     </distributionManagement>
 
