@@ -55,37 +55,11 @@
 
   <build>
     <plugins>
-      <!--
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
         <configuration>
           <skip>true</skip>
         </configuration>
-      </plugin>
-      -->
-      <!-- deploy to artifactory instead -->
-      <plugin>
-        <groupId>org.jfrog.buildinfo</groupId>
-        <artifactId>artifactory-maven-plugin</artifactId>
-        <version>3.4.0</version>
-        <inherited>false</inherited>
-        <executions>
-          <execution>
-            <id>build-info</id>
-            <goals>
-              <goal>publish</goal>
-            </goals>
-            <configuration>
-              <publisher>
-                <contextUrl>https://dua3.jfrog.io/artifactory</contextUrl>
-                <username>${username}</username>
-                <password>${password}</password>
-                <repoKey>default-libs-release-local</repoKey>
-                <snapshotRepoKey>default-libs-snapshot-local</snapshotRepoKey>
-              </publisher>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
