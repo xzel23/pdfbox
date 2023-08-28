@@ -259,7 +259,7 @@ public abstract class FontDescriptorHelper<T extends FontContainer>
     {
         try (InputStream metaDataContent = metadata.createInputStream())
         {
-            return IOUtils.toByteArray(metaDataContent);
+            return metaDataContent.readAllBytes();
         }
         catch (IOException e)
         {

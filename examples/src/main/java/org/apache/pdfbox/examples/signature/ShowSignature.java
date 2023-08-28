@@ -665,7 +665,7 @@ public final class ShowSignature
                 COSStream cosStream = (COSStream) streamObj.getObject();
                 try (InputStream is = cosStream.createInputStream())
                 {
-                    byte[] streamBytes = IOUtils.toByteArray(is);
+                    byte[] streamBytes = is.readAllBytes();
                     System.out.println(description + " (" + elements.indexOf(streamObj) + "): "
                         + Hex.getString(streamBytes));
                 }

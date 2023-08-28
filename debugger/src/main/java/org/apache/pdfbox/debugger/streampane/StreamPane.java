@@ -263,7 +263,7 @@ public class StreamPane implements ActionListener
                 JOptionPane.showMessageDialog(panel, command + " text not available (filter missing?)");
                 return;
             }
-            hexView.changeData(IOUtils.toByteArray(is));
+            hexView.changeData(is.readAllBytes());
         }
     }
 
@@ -332,7 +332,7 @@ public class StreamPane implements ActionListener
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             try
             {
-                IOUtils.copy(in, baos);
+                in.transferTo(baos);
                 return baos.toString(encoding);
             }
             catch (IOException e)
@@ -406,7 +406,7 @@ public class StreamPane implements ActionListener
             PDFStreamParser parser;
             try
             {
-                parser = new PDFStreamParser(IOUtils.toByteArray(inputStream));
+                parser = new PDFStreamParser(inputStream.readAllBytes());
                 parser.parse().forEach(obj -> writeToken(obj, docu));
             }
             catch (IOException e)

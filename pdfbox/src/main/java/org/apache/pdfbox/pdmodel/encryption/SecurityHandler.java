@@ -377,7 +377,7 @@ public abstract class SecurityHandler<T_POLICY extends ProtectionPolicy>
 
         try (CipherInputStream cis = new CipherInputStream(data, cipher))
         {
-            IOUtils.copy(cis, output);
+            cis.transferTo(output);
         }
         catch (IOException exception)
         {
@@ -561,7 +561,7 @@ public abstract class SecurityHandler<T_POLICY extends ProtectionPolicy>
         {
             return;
         }
-        byte[] rawData = IOUtils.toByteArray(stream.createRawInputStream());
+        byte[] rawData = stream.createRawInputStream().readAllBytes();
         ByteArrayInputStream encryptedStream = new ByteArrayInputStream(rawData);
         try (OutputStream output = stream.createRawOutputStream())
         {

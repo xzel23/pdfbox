@@ -61,7 +61,7 @@ class PDType1FontEmbedder
         dict.setItem(COSName.SUBTYPE, COSName.TYPE1);
 
         // read the pfb
-        byte[] pfbBytes = IOUtils.toByteArray(pfbStream);
+        byte[] pfbBytes = pfbStream.readAllBytes();
         PfbParser pfbParser = new PfbParser(pfbBytes);
         type1 = Type1Font.createWithPFB(pfbBytes);
 

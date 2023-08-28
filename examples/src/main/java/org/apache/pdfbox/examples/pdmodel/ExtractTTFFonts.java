@@ -201,7 +201,7 @@ public final class ExtractTTFFonts
                 try (OutputStream os = new FileOutputStream(new File(name + ".ttf"));
                      InputStream is = ff2Stream.createInputStream())
                 {
-                    IOUtils.copy(is, os);
+                    is.transferTo(os);
                 }
             }
         }

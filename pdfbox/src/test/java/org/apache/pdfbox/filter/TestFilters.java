@@ -141,7 +141,7 @@ class TestFilters
     void testPDFBOX1977() throws IOException
     {
         Filter lzwFilter = FilterFactory.INSTANCE.getFilter(COSName.LZW_DECODE);
-        byte[] byteArray = IOUtils.toByteArray(this.getClass().getResourceAsStream("PDFBOX-1977.bin"));
+        byte[] byteArray = this.getClass().getResourceAsStream("PDFBOX-1977.bin").readAllBytes();
         checkEncodeDecode(lzwFilter, byteArray);
     }
 

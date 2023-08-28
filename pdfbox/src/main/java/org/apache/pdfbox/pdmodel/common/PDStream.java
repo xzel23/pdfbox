@@ -37,7 +37,6 @@ import org.apache.pdfbox.cos.COSStream;
 import org.apache.pdfbox.filter.DecodeOptions;
 import org.apache.pdfbox.filter.Filter;
 import org.apache.pdfbox.filter.FilterFactory;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.io.RandomAccessInputStream;
 import org.apache.pdfbox.io.RandomAccessRead;
 import org.apache.pdfbox.pdmodel.PDDocument;

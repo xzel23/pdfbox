@@ -199,14 +199,14 @@ class TestCOSStream
 
     private void validateEncoded(COSStream stream, byte[] expected) throws IOException
     {
-        byte[] decoded = IOUtils.toByteArray(stream.createRawInputStream());
+        byte[] decoded = stream.createRawInputStream().readAllBytes();
         stream.close();
         assertTrue(Arrays.equals(expected, decoded), "Encoded data doesn't match input");
     }
 
     private void validateDecoded(COSStream stream, byte[] expected) throws IOException
     {
-        byte[] encoded = IOUtils.toByteArray(stream.createInputStream());
+        byte[] encoded = stream.createInputStream().readAllBytes();
         stream.close();
         assertTrue(Arrays.equals(expected, encoded), "Decoded data doesn't match input");
     }

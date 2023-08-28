@@ -1202,7 +1202,7 @@ public class PDFDebugger extends JFrame implements Callable<Integer>
                 COSStream stream = (COSStream) selectedNode;
                 try (InputStream in = stream.createInputStream())
                 {
-                    return new String(IOUtils.toByteArray(in));
+                    return new String(in.readAllBytes());
                 }
             }
             catch( IOException e )

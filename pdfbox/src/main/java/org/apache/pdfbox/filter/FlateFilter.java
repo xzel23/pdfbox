@@ -128,7 +128,7 @@ final class FlateFilter extends Filter
         Deflater deflater = new Deflater(compressionLevel);
         try (DeflaterOutputStream out = new DeflaterOutputStream(encoded,deflater))
         {
-            IOUtils.copy(input, out);
+            input.transferTo(out);
         }
         encoded.flush();
         deflater.end();

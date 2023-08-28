@@ -1365,7 +1365,7 @@ public class COSDictionary extends COSBase implements COSUpdateInfo
             {
                 try (InputStream stream = ((COSStream) base).createRawInputStream())
                 {
-                    byte[] b = IOUtils.toByteArray(stream);
+                    byte[] b = stream.readAllBytes();
                     sb.append("COSStream{").append(Arrays.hashCode(b)).append("}");
                 }
             }

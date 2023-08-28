@@ -80,7 +80,7 @@ public final class JPEGFactory
     public static PDImageXObject createFromStream(PDDocument document, InputStream stream)
             throws IOException
     {
-        return createFromByteArray(document, IOUtils.toByteArray(stream));
+        return createFromByteArray(document, stream.readAllBytes());
     }
 
     /**

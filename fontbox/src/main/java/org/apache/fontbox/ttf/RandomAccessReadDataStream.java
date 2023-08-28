@@ -61,7 +61,7 @@ class RandomAccessReadDataStream extends TTFDataStream
      */
     RandomAccessReadDataStream(InputStream inputStream) throws IOException
     {
-        data = IOUtils.toByteArray(inputStream);
+        data = inputStream.readAllBytes();
         length = data.length;
     }
 

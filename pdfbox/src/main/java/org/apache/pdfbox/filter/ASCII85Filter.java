@@ -34,7 +34,7 @@ final class ASCII85Filter extends Filter
     {
         try (ASCII85InputStream is = new ASCII85InputStream(encoded))
         {
-            IOUtils.copy(is, decoded);
+            is.transferTo(decoded);
         }
         decoded.flush();
         return new DecodeResult(parameters);
@@ -46,7 +46,7 @@ final class ASCII85Filter extends Filter
     {
         try (ASCII85OutputStream os = new ASCII85OutputStream(encoded))
         {
-            IOUtils.copy(input, os);
+            input.transferTo(os);
         }
         encoded.flush();
     }
