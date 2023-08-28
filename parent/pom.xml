@@ -42,7 +42,7 @@
 
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox-parent</artifactId>
-    <version>3.0.0-duathree</version>
+    <version>3.0.1-duathree-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>PDFBox parent</name>
@@ -550,6 +550,6 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/xzel23/pdfbox.git</developerConnection>
-    <tag>pdfbox-reactor-3.0.0-duathree</tag>
+    <tag>HEAD</tag>
   </scm>
 </project>
