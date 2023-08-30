@@ -23,10 +23,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +65,6 @@ import org.apache.pdfbox.cos.COSStream;
 import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.debugger.hexviewer.HexView;
 import org.apache.pdfbox.debugger.streampane.tooltip.ToolTipController;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdfparser.PDFStreamParser;
 import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.util.XMLUtil;
@@ -333,7 +329,7 @@ public class StreamPane implements ActionListener
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             try
             {
-                IOUtils.copy(in, baos);
+                in.transferTo(baos);
                 return baos.toString(encoding);
             }
             catch (IOException e)

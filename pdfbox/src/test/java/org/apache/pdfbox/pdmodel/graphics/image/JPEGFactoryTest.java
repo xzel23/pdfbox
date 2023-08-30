@@ -18,11 +18,7 @@ package org.apache.pdfbox.pdmodel.graphics.image;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -32,7 +28,6 @@ import javax.imageio.ImageIO;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceCMYK;
 import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceGray;
@@ -324,8 +319,8 @@ class JPEGFactoryTest
             ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
             try (InputStream dctStream = img.createInputStream(Arrays.asList(COSName.DCT_DECODE.getName())))
             {
-                IOUtils.copy(resourceStream, baos1);
-                IOUtils.copy(dctStream, baos2);
+                resourceStream.transferTo(baos1);
+                dctStream.transferTo(baos2);
             }
             resourceStream.close();
             assertArrayEquals(baos1.toByteArray(), baos2.toByteArray());

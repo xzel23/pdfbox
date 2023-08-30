@@ -34,12 +34,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -135,7 +130,6 @@ import org.apache.pdfbox.debugger.ui.XrefEntries;
 import org.apache.pdfbox.debugger.ui.XrefEntry;
 import org.apache.pdfbox.debugger.ui.ZoomMenu;
 import org.apache.pdfbox.filter.FilterFactory;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.common.PDPageLabels;
@@ -1665,7 +1659,7 @@ public class PDFDebugger extends JFrame implements Callable<Integer>, HyperlinkL
                 try (InputStream stream = url.openStream())
                 {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    IOUtils.copy(stream, baos);
+                    stream.transferTo(baos);
                     JEditorPane editor
                             = new JEditorPane("text/plain", baos.toString(StandardCharsets.UTF_8));
                     editor.setEditable(false);

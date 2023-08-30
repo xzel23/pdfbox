@@ -22,7 +22,6 @@ import org.apache.pdfbox.cos.COSBase;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.cos.COSStream;
 import org.apache.pdfbox.debugger.treestatus.TreeStatus;
-import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 
 import javax.swing.JMenuItem;
@@ -37,10 +36,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -301,7 +297,7 @@ public class Tree extends JTree
                 try (InputStream is = cosStream.createInputStream();
                         FileOutputStream os = new FileOutputStream(temp))
                 {
-                    IOUtils.copy(is, os);
+                    is.transferTo(os);
                 }
                 Desktop.getDesktop().open(temp);
             }

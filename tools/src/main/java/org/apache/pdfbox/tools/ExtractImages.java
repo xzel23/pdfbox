@@ -18,11 +18,7 @@ package org.apache.pdfbox.tools;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -384,7 +380,7 @@ public final class ExtractImages implements Callable<Integer>
                     {
                         // RGB or Gray colorspace: get and write the unmodified JPEG stream
                         InputStream data = pdImage.createInputStream(JPEG);
-                        IOUtils.copy(data, imageOutput);
+                        data.transferTo(imageOutput);
                         IOUtils.closeQuietly(data);
                     }
                     else
@@ -407,7 +403,7 @@ public final class ExtractImages implements Callable<Integer>
                         // RGB or Gray colorspace: get and write the unmodified JPEG2000 stream
                         InputStream data = pdImage.createInputStream(
                                 Collections.singletonList(COSName.JPX_DECODE.getName()));
-                        IOUtils.copy(data, imageOutput);
+                        data.transferTo(imageOutput);
                         IOUtils.closeQuietly(data);
                     }
                     else
