@@ -219,35 +219,6 @@ public final class IOUtils
                 // below!):
                 throw se;
             }
-            catch (ReflectiveOperationException | RuntimeException e)
-            {
-                // *** sun.misc.Cleaner unmapping (Java 8) ***
-                final Class<?> directBufferClass = Class.forName("java.nio.DirectByteBuffer");
-
-                final Method m = directBufferClass.getMethod("cleaner");
-                m.setAccessible(true);
-                final MethodHandle directBufferCleanerMethod = lookup.unreflect(m);
-                final Class<?> cleanerClass = directBufferCleanerMethod.type().returnType();
-
-                /*
-                 * "Compile" a MH that basically is equivalent to the following code: void unmapper(ByteBuffer
-                 * byteBuffer) { sun.misc.Cleaner cleaner = ((java.nio.DirectByteBuffer) byteBuffer).cleaner(); if
-                 * (Objects.nonNull(cleaner)) { cleaner.clean(); } else { noop(cleaner); // the noop is needed because
-                 * MethodHandles#guardWithTest always needs ELSE } }
-                 */
-                final MethodHandle cleanMethod = lookup.findVirtual(cleanerClass, "clean",
-                        methodType(void.class));
-                final MethodHandle nonNullTest = lookup
-                        .findStatic(Objects.class, "nonNull",
-                                methodType(boolean.class, Object.class))
-                        .asType(methodType(boolean.class, cleanerClass));
-                final MethodHandle noop = dropArguments(
-                        constant(Void.class, null).asType(methodType(void.class)), 0, cleanerClass);
-                final MethodHandle unmapper = filterReturnValue(directBufferCleanerMethod,
-                        guardWithTest(nonNullTest, cleanMethod, noop))
-                                .asType(methodType(void.class, ByteBuffer.class));
-                return newBufferCleaner(directBufferClass, unmapper);
-            }
         }
         catch (SecurityException se)
         {
