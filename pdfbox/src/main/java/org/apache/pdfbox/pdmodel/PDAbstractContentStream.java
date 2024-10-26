@@ -1322,6 +1322,24 @@ abstract class PDAbstractContentStream implements Closeable
     }
 
     /**
+     * Begin a marked content sequence with a reference to the marked content identifier (MCID).
+     *
+     * @param tag the tag to be added to the content stream
+     * @param mcid the marked content identifier (MCID)
+     * @throws IOException If the content stream could not be written
+     */
+    public void beginMarkedContent(COSName tag, int mcid) throws IOException
+    {
+        if (mcid < 0)
+        {
+            throw new IllegalArgumentException("mcid should not be negative");
+        }
+        writeOperand(tag);
+        write("<</MCID " + mcid + ">> ");
+        writeOperator(OperatorName.BEGIN_MARKED_CONTENT_SEQ);
+    }
+
+    /**
      * Begin a marked content sequence with a reference to an entry in the page resources' Properties dictionary.
      *
      * @param tag the tag to be added to the content stream
