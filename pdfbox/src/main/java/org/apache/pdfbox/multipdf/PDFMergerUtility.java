@@ -907,7 +907,7 @@ public class PDFMergerUtility
         PDViewerPreferences destViewerPreferences = destCatalog.getViewerPreferences();
         if (destViewerPreferences == null)
         {
-            destViewerPreferences = new PDViewerPreferences(new COSDictionary());
+            destViewerPreferences = new PDViewerPreferences();
             destCatalog.setViewerPreferences(destViewerPreferences);
         }
         mergeInto(srcViewerPreferences.getCOSObject(), destViewerPreferences.getCOSObject(),
