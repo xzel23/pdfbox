@@ -71,7 +71,7 @@ public class PDStructureTreeRoot extends PDStructureNode
 
     /**
      * Returns the K entry. This can be a dictionary representing a structure element, or an array
-     * of them.
+     * of them. To get it as a list of PDStructureElement objects, use {@link #getKids()} instead.
      *
      * @return the K entry.
      */
