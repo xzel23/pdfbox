@@ -44,6 +44,7 @@ import org.apache.pdfbox.pdmodel.common.COSObjectable;
 import org.apache.pdfbox.pdmodel.common.PDNameTreeNode;
 import org.apache.pdfbox.pdmodel.common.PDNumberTreeNode;
 import org.apache.pdfbox.pdmodel.documentinterchange.logicalstructure.PDStructureElement;
+import org.apache.pdfbox.pdmodel.documentinterchange.logicalstructure.PDStructureNode;
 import org.apache.pdfbox.pdmodel.documentinterchange.logicalstructure.PDStructureTreeRoot;
 import org.apache.pdfbox.pdmodel.interactive.action.PDActionGoTo;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
@@ -884,6 +885,17 @@ class PDFMergerUtilityTest
             if (kdict.containsKey(COSName.K))
             {
                 checkElement(pageTree, kdict.getDictionaryObject(COSName.K));
+                
+                // Check that the /P entry points to the correct object
+                PDStructureNode node = PDStructureNode.create(kdict);
+                for (Object obj : node.getKids())
+                {
+                    if (obj instanceof PDStructureElement)
+                    {
+                        PDStructureNode parent = ((PDStructureElement) obj).getParent();
+                        assertTrue(parent.getCOSObject() == kdict);
+                    }
+                }
                 return;
             }
 
