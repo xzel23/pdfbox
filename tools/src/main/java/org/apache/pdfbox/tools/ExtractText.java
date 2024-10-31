@@ -184,8 +184,7 @@ public final class ExtractText  implements Callable<Integer>
             AccessPermission ap = document.getCurrentAccessPermission();
             if( ! ap.canExtractContent() )
             {
-                System.out.println( "You do not have permission to extract text" );
-                //SYSERR.println( "You do not have permission to extract text");
+                SYSERR.println( "You do not have permission to extract text");
                 return 1;
             }
             
@@ -330,7 +329,6 @@ public final class ExtractText  implements Callable<Integer>
     {
         for (int p = startPage; p <= endPage; ++p)
         {
-            //System.err.println("page " + p);
             stripper.setStartPage(p);
             stripper.setEndPage(p);
             try
