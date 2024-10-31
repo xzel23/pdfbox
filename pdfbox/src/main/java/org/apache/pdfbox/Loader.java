@@ -73,10 +73,18 @@ public class Loader
      */
     public static FDFDocument loadFDF(File file) throws IOException
     {
-        try (RandomAccessRead readBuffer = new RandomAccessReadBufferedFile(file))
+        RandomAccessRead raFile = null;
+        try
         {
-            FDFParser parser = new FDFParser(readBuffer);
+            // PDFBOX-5894: RandomAccessRead is not closed here
+            raFile = new RandomAccessReadBufferedFile(file);
+            FDFParser parser = new FDFParser(raFile);
             return parser.parse();
+        }
+        catch (IOException ioe)
+        {
+            IOUtils.closeQuietly(raFile);
+            throw ioe;
         }
     }
 
