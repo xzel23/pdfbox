@@ -76,18 +76,6 @@ public class FDFDocument implements Closeable
      * Constructor that uses an existing document. The COSDocument that is passed in must be valid.
      *
      * @param doc The COSDocument that this document wraps.
-     * @deprecated Use {@link #FDFDocument(COSDocument, RandomAccessRead) }
-     */
-    @Deprecated
-    public FDFDocument(COSDocument doc)
-    {
-        this(doc, null);
-    }
-
-    /**
-     * Constructor that uses an existing document. The COSDocument that is passed in must be valid.
-     *
-     * @param doc The COSDocument that this document wraps.
      * @param source The source that will be closed when this document gets closed, can be null.
      */
     public FDFDocument(COSDocument doc, RandomAccessRead source)
@@ -150,7 +138,7 @@ public class FDFDocument implements Closeable
      */
     public FDFCatalog getCatalog()
     {
-        FDFCatalog retval = null;
+        FDFCatalog retval;
         COSDictionary trailer = document.getTrailer();
         COSDictionary root = trailer.getCOSDictionary(COSName.ROOT);
         if (root == null)
