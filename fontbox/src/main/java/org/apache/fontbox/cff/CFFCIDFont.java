@@ -282,7 +282,7 @@ public class CFFCIDFont extends CFFFont
         {
             throw new IllegalArgumentException("Invalid selector");
         }
-        return Integer.parseInt(selector.substring(1));
+        return Integer.parseInt(selector, 1, selector.length(), 10);
     }
 
     /**

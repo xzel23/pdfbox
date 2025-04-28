@@ -116,28 +116,28 @@ public final class DateConverter
                 {
                     throw new IOException("Error: Invalid date format '" + date + "'");
                 }
-                int year = Integer.parseInt(date.substring(0, 4));
+                int year = Integer.parseInt(date, 0, 4, 10);
                 if (date.length() >= 6)
                 {
-                    month = Integer.parseInt(date.substring(4, 6));
+                    month = Integer.parseInt(date, 4, 6, 10);
                 }
                 if (date.length() >= 8)
                 {
-                    day = Integer.parseInt(date.substring(6, 8));
+                    day = Integer.parseInt(date, 6, 8, 10);
                 }
                 if (date.length() >= 10)
                 {
-                    hour = Integer.parseInt(date.substring(8, 10));
+                    hour = Integer.parseInt(date, 8, 10, 10);
                 }
                 if (date.length() >= 12)
                 {
-                    minute = Integer.parseInt(date.substring(10, 12));
+                    minute = Integer.parseInt(date, 10, 12, 10);
                 }
 
                 int timeZonePos = 12;
                 if (date.length() - 12 > 5 || (date.length() - 12 == 3 && date.endsWith("Z")))
                 {
-                    second = Integer.parseInt(date.substring(12, 14));
+                    second = Integer.parseInt(date, 12, 14, 10);
                     timeZonePos = 14;
                 }
 
@@ -157,25 +157,25 @@ public final class DateConverter
                             if (sign == '+')
                             {
                                 // parseInt cannot handle the + sign
-                                hours = Integer.parseInt(date.substring((timeZonePos + 1), (timeZonePos + 3)));
+                                hours = Integer.parseInt(date, (timeZonePos + 1), (timeZonePos + 3), 10);
                             }
                             else
                             {
-                                hours = -Integer.parseInt(date.substring(timeZonePos, (timeZonePos + 2)));
+                                hours = -Integer.parseInt(date, timeZonePos, (timeZonePos + 2), 10);
                             }
                         }
                         if (sign == '+')
                         {
                             if (date.length() >= (timeZonePos + 5))
                             {
-                                minutes = Integer.parseInt(date.substring((timeZonePos + 3), (timeZonePos + 5)));
+                                minutes = Integer.parseInt(date, (timeZonePos + 3), (timeZonePos + 5), 10);
                             }
                         }
                         else
                         {
                             if (date.length() >= (timeZonePos + 4))
                             {
-                                minutes = Integer.parseInt(date.substring((timeZonePos + 2), (timeZonePos + 4)));
+                                minutes = Integer.parseInt(date, (timeZonePos + 2), (timeZonePos + 4), 10);
                             }
                         }
                         zone = new SimpleTimeZone(hours * 60 * 60 * 1000 + minutes * 60 * 1000, "Unknown");

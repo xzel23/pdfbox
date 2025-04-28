@@ -613,7 +613,7 @@ public abstract class BaseParser
                         int character = 0;
                         try
                         {
-                            character = Integer.parseInt( octal.toString(), 8 );
+                            character = Integer.parseInt( octal, 0, octal.length(), 8 );
                         }
                         catch( NumberFormatException e )
                         {
@@ -711,7 +711,7 @@ public abstract class BaseParser
                 break;
             }
         }
-        return COSString.parseHex(sBuf.toString());
+        return COSString.parseHexCharSequence(sBuf);
     }
    
     /**

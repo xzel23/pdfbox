@@ -128,12 +128,27 @@ public final class COSString extends COSBase
 
     /**
      * This will create a COS string from a string of hex characters.
+     * <p>
+     * If the input text is contained in a class that extends CharSquence, consider using
+     * {@link #parseHexCharSequence(CharSequence)} instead as that allows you to avoid creating
+     * a temporary String instance of the input data.
      *
      * @param hex A hex string.
      * @return A cos string with the hex characters converted to their actual bytes.
      * @throws IOException If there is an error with the hex string.
      */
-    public static COSString parseHex(String hex) throws IOException
+    public static COSString parseHex(String hex) throws IOException {
+        return parseHexCharSequence(hex);
+    }
+
+    /**
+     * This will create a COS string from a {@link CharSequence} of hex characters.
+     *
+     * @param hex A hex string.
+     * @return A cos string with the hex characters converted to their actual bytes.
+     * @throws IOException If there is an error with the hex string.
+     */
+    public static COSString parseHexCharSequence(CharSequence hex) throws IOException
     {
         // skip leading and trailing whitespace
         int end = hex.length();

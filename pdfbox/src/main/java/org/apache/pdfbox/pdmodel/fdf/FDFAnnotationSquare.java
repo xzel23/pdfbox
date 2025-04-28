@@ -72,7 +72,7 @@ public class FDFAnnotationSquare extends FDFAnnotation
         String color = element.getAttribute("interior-color");
         if (color != null && color.length() == 7 && color.charAt(0) == '#')
         {
-            int colorValue = Integer.parseInt(color.substring(1, 7), 16);
+            int colorValue = Integer.parseInt(color, 1, 7, 16);
             setInteriorColor(new Color(colorValue));
         }
 

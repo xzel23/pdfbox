@@ -695,7 +695,7 @@ public class TrueTypeFont implements FontBoxFont, Closeable
         // PDFBOX-5604: assume gnnnnn is a gid
         if (name.matches("g\\d+"))
         {
-            return Integer.parseInt(name.substring(1));
+            return Integer.parseInt(name, 1, name.length(), 10);
         }
 
         return 0;
@@ -737,7 +737,7 @@ public class TrueTypeFont implements FontBoxFont, Closeable
             {
                 for (int chPos = 3; chPos + 4 <= nameLength; chPos += 4)
                 {
-                    int codePoint = Integer.parseInt(name.substring(chPos, chPos + 4), 16);
+                    int codePoint = Integer.parseInt(name, chPos, chPos + 4, 16);
                     if (codePoint <= 0xD7FF || codePoint >= 0xE000) // disallowed code area
                     {
                         uniStr.append((char) codePoint);

@@ -240,7 +240,7 @@ public final class GlyphList
                 {
                     for (int chPos = 3; chPos + 4 <= nameLength; chPos += 4)
                     {
-                        int codePoint = Integer.parseInt(name.substring(chPos, chPos + 4), 16);
+                        int codePoint = Integer.parseInt(name, chPos, chPos + 4, 16);
                         if (codePoint > 0xD7FF && codePoint < 0xE000)
                         {
                             LOG.warn("Unicode character name with disallowed code area: {}", name);
@@ -262,7 +262,7 @@ public final class GlyphList
                 // test for an alternate Unicode name representation uXXXX
                 try
                 {
-                    int codePoint = Integer.parseInt(name.substring(1), 16);
+                    int codePoint = Integer.parseInt(name, 1, name.length(), 16);
                     if (codePoint > 0xD7FF && codePoint < 0xE000)
                     {
                         LOG.warn("Unicode character name with disallowed code area: {}", name);

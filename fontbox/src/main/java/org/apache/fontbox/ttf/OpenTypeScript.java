@@ -267,8 +267,8 @@ public final class OpenTypeScript
                 }
                 else
                 {
-                    range[0] = Integer.parseInt(characters.substring(0, rangeDelim), 16);
-                    range[1] = Integer.parseInt(characters.substring(rangeDelim + 2), 16);
+                    range[0] = Integer.parseInt(characters, 0, rangeDelim, 16);
+                    range[1] = Integer.parseInt(characters, rangeDelim + 2, characters.length(), 16);
                 }
                 if (range[0] == lastRange[1] + 1 && script.equals(lastScript))
                 {
