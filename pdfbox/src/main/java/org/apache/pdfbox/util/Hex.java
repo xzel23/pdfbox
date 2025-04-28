@@ -228,13 +228,13 @@ public final class Hex
             }
             else
             {
-                String hexByte = s.substring(i, i + 2);
                 try
                 {
-                    baos.write(Integer.parseInt(hexByte, 16)); // Byte.parseByte won't work with "9C"
+                    baos.write(Integer.parseInt(s, i, i + 2, 16)); // Byte.parseByte won't work with "9C"
                 }
                 catch (NumberFormatException ex)
                 {
+                    String hexByte = s.substring(i, i + 2);
                     LOG.error(() -> "Can't parse " + hexByte + ", aborting decode", ex);
                     break;
                 }
