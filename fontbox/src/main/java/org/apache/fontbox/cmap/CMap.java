@@ -187,7 +187,7 @@ public class CMap
         }
         if (LOG.isWarnEnabled())
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(maxCodeLength * 10);
             for (int i = 0; i < maxCodeLength; ++i)
             {
                 sb.append(String.format("0x%02X (%04o) ", bytes[i], bytes[i]));

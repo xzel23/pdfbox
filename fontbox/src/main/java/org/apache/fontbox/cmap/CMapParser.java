@@ -592,9 +592,8 @@ public class CMapParser
     {
         // header operations, for now return the entire line
         // may need to smarter in the future
-        int nextByte = firstByte;
-        StringBuilder buffer = new StringBuilder();
-        buffer.append((char) nextByte);
+        StringBuilder buffer = new StringBuilder(80);
+        buffer.append((char) firstByte);
         readUntilEndOfLine(randomAcccessRead, buffer);
         return buffer.toString();
     }
