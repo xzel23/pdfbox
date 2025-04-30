@@ -30,7 +30,6 @@ public class CMapStrings
     private static final List<String> twoByteMappings = new ArrayList<>(256 * 256);
     private static final List<String> oneByteMappings = new ArrayList<>(256);
 
-    private static final List<Integer> indexValues = new ArrayList<>(256 * 256);
     private static final List<byte[]> oneByteValues = new ArrayList<>(256);
     private static final List<byte[]> twoByteValues = new ArrayList<>(256 * 256);
 
@@ -53,7 +52,6 @@ public class CMapStrings
                 byte[] bytes = { (byte) i, (byte) j };
                 twoByteMappings.add(new String(bytes, StandardCharsets.UTF_16BE));
                 twoByteValues.add(bytes);
-                indexValues.add((i * 256) + j);
             }
         }
         for (int i = 0; i < 256; i++)
@@ -73,12 +71,14 @@ public class CMapStrings
      */
     public static String getMapping(byte[] bytes)
     {
-        if (bytes.length > 2)
-        {
-            return null;
+        switch (bytes.length) {
+            case 1:
+                return oneByteMappings.get(CMap.toInt(bytes));
+            case 2:
+                return twoByteMappings.get(CMap.toInt(bytes));
+            default:
+                return null;
         }
-        return bytes.length == 1 ? oneByteMappings.get(CMap.toInt(bytes))
-                : twoByteMappings.get(CMap.toInt(bytes));
     }
 
     /**
@@ -89,13 +89,16 @@ public class CMapStrings
      * @param bytes the given combination of bytes
      * @return the Integer representation for the given combination of bytes
      */
-    public static Integer getIndexValue(byte[] bytes)
+    public static int getIndexValue(byte[] bytes)
     {
-        if (bytes.length > 2)
-        {
-            return null;
+        switch (bytes.length) {
+            case 1:
+                return 0xff & bytes[0];
+            case 2:
+                return (0xff & bytes[0]) << 8 | (0xff & bytes[1]);
+            default:
+                throw new IllegalArgumentException( "Invalid number of bytes " + bytes.length);
         }
-        return indexValues.get(CMap.toInt(bytes));
     }
 
     /**
@@ -107,12 +110,14 @@ public class CMapStrings
      */
     public static byte[] getByteValue(byte[] bytes)
     {
-        if (bytes.length > 2)
-        {
-            return null;
+        switch (bytes.length) {
+            case 1:
+                return oneByteValues.get(CMap.toInt(bytes));
+            case 2:
+                return twoByteValues.get(CMap.toInt(bytes));
+            default:
+                return null;
         }
-        return bytes.length == 1 ? oneByteValues.get(CMap.toInt(bytes))
-                : twoByteValues.get(CMap.toInt(bytes));
     }
 
 }

@@ -209,14 +209,14 @@ class CMapStringsTest
         byte[] maxValueOneByte = new byte[] { (byte) 0xff };
         assertEquals(CMapStrings.getIndexValue(maxValueOneByte),
                 CMapStrings.getIndexValue(maxValueOneByte));
-        assertSame(CMapStrings.getIndexValue(maxValueOneByte), CMapStrings
+        assertEquals(CMapStrings.getIndexValue(maxValueOneByte), CMapStrings
                 .getIndexValue(maxValueOneByte));
         assertEquals(0xff, CMapStrings.getIndexValue(maxValueOneByte));
 
         byte[] anyValueOneByte = new byte[] { 98 };
         assertEquals(CMapStrings.getIndexValue(anyValueOneByte),
                 CMapStrings.getIndexValue(anyValueOneByte));
-        assertSame(CMapStrings.getIndexValue(anyValueOneByte), CMapStrings
+        assertEquals(CMapStrings.getIndexValue(anyValueOneByte), CMapStrings
                 .getIndexValue(anyValueOneByte));
         assertEquals(98, CMapStrings.getIndexValue(anyValueOneByte));
     }
@@ -237,38 +237,30 @@ class CMapStringsTest
         byte[] maxValueTwoByte = new byte[] { (byte) 0xff, (byte) 0xff };
         assertEquals(CMapStrings.getIndexValue(maxValueTwoByte),
                 CMapStrings.getIndexValue(maxValueTwoByte));
-        assertSame(CMapStrings.getIndexValue(maxValueTwoByte), CMapStrings
+        assertEquals(CMapStrings.getIndexValue(maxValueTwoByte), CMapStrings
                 .getIndexValue(maxValueTwoByte));
         assertEquals(0xffff, CMapStrings.getIndexValue(maxValueTwoByte));
 
         byte[] anyValueTwoByte1 = new byte[] { 0x62, 0x43 };
         assertEquals(CMapStrings.getIndexValue(anyValueTwoByte1),
                 CMapStrings.getIndexValue(anyValueTwoByte1));
-        assertSame(CMapStrings.getIndexValue(anyValueTwoByte1), CMapStrings
+        assertEquals(CMapStrings.getIndexValue(anyValueTwoByte1), CMapStrings
                 .getIndexValue(anyValueTwoByte1));
         assertEquals(0x6243, CMapStrings.getIndexValue(anyValueTwoByte1));
 
         byte[] anyValueTwoByte2 = new byte[] { (byte) 0xff, 0x43 };
         assertEquals(CMapStrings.getIndexValue(anyValueTwoByte2),
                 CMapStrings.getIndexValue(anyValueTwoByte2));
-        assertSame(CMapStrings.getIndexValue(anyValueTwoByte2), CMapStrings
+        assertEquals(CMapStrings.getIndexValue(anyValueTwoByte2), CMapStrings
                 .getIndexValue(anyValueTwoByte2));
         assertEquals(0xff43, CMapStrings.getIndexValue(anyValueTwoByte2));
 
         byte[] anyValueTwoByte3 = new byte[] { 0x38, (byte) 0xff };
         assertEquals(CMapStrings.getIndexValue(anyValueTwoByte3),
                 CMapStrings.getIndexValue(anyValueTwoByte3));
-        assertSame(CMapStrings.getIndexValue(anyValueTwoByte3), CMapStrings
+        assertEquals(CMapStrings.getIndexValue(anyValueTwoByte3), CMapStrings
                 .getIndexValue(anyValueTwoByte3));
         assertEquals(0x38ff, CMapStrings.getIndexValue(anyValueTwoByte3));
-    }
-
-    @Test
-    void getNonCachedIndexValues()
-    {
-        // arrays consisting of more than 2 bytes aren't cached.
-        assertNull(CMapStrings.getIndexValue(new byte[] { 0, 0, 0 }));
-        assertNull(CMapStrings.getIndexValue(new byte[] { 0, 0, 0, 0 }));
     }
 
 }
