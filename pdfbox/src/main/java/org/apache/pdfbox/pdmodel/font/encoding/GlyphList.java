@@ -235,23 +235,17 @@ public final class GlyphList
             else if (name.length() == 7 && name.startsWith("uni"))
             {
                 // test for Unicode name in the format uniXXXX where X is hex
-                int nameLength = name.length();
-                StringBuilder uniStr = new StringBuilder();
                 try
                 {
-                    for (int chPos = 3; chPos + 4 <= nameLength; chPos += 4)
+                    int codePoint = Integer.parseInt(name, 3, 7, 16);
+                    if (codePoint > 0xD7FF && codePoint < 0xE000)
                     {
-                        int codePoint = Integer.parseInt(name, chPos, chPos + 4, 16);
-                        if (codePoint > 0xD7FF && codePoint < 0xE000)
-                        {
-                            LOG.warn("Unicode character name with disallowed code area: {}", name);
-                        }
-                        else
-                        {
-                            uniStr.append((char) codePoint);
-                        }
+                        LOG.warn("Unicode character name with disallowed code area: {}", name);
                     }
-                    unicode = uniStr.toString();
+                    else
+                    {
+                        unicode = String.valueOf((char) codePoint);
+                    }
                 }
                 catch (NumberFormatException nfe)
                 {
@@ -263,7 +257,7 @@ public final class GlyphList
                 // test for an alternate Unicode name representation uXXXX
                 try
                 {
-                    int codePoint = Integer.parseInt(name, 1, name.length(), 16);
+                    int codePoint = Integer.parseInt(name, 1, 5, 16);
                     if (codePoint > 0xD7FF && codePoint < 0xE000)
                     {
                         LOG.warn("Unicode character name with disallowed code area: {}", name);
