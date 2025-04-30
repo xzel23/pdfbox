@@ -78,10 +78,7 @@ public class PDTrueTypeFont extends PDSimpleFont implements PDVectorFont
     {
         MacOSRomanEncoding.INSTANCE.getCodeToNameMap().forEach((key, value) ->
         {
-            if (!INVERTED_MACOS_ROMAN.containsKey(value))
-            {
-                INVERTED_MACOS_ROMAN.put(value, key);
-            }
+            INVERTED_MACOS_ROMAN.putIfAbsent(value, key);
         });
     }
 
