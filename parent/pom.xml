@@ -179,7 +179,7 @@
                 <configuration>
                     <useReleaseProfile>false</useReleaseProfile>
                     <goals>deploy</goals>
-                    <arguments>-Papache-release,pedantic</arguments>
+                    <arguments>-Prepsy-release,pedantic</arguments>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
@@ -322,6 +322,19 @@
       </build>
     </profile>
   </profiles>
+
+  <distributionManagement>
+    <repository>
+      <id>dua3-repsy-repo</id>
+      <name>dua3</name>
+      <url>https://repo.repsy.io/mvn/dua3/dua3</url>
+    </repository>
+    <snapshotRepository>
+      <id>dua3-repsy-repo-snapshots</id>
+      <name>dua3-snapshot</name>
+      <url>https://repo.repsy.io/mvn/dua3/dua3-snapshot</url>
+    </snapshotRepository>
+  </distributionManagement>
 
       <!-- Developers listed by PMC Chair, PMC all alphabetical-->
     <developers>
