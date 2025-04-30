@@ -41,6 +41,7 @@
     <module>app</module>
     <module>debugger-app</module>
     <module>examples</module>
+    <module>issues</module>
   </modules>
 
   <scm>
