@@ -674,12 +674,10 @@ public class CFFParser
 
             parseCIDFontDicts(input, topDict, (CFFCIDFont) font, numEntries);
 
-            List<Number> privMatrix = null;
             List<Map<String, Object>> fontDicts = ((CFFCIDFont) font).getFontDicts();
-            if (!fontDicts.isEmpty() && fontDicts.get(0).containsKey("FontMatrix"))
-            {
-                privMatrix = (List<Number>) fontDicts.get(0).get("FontMatrix");
-            }
+            List<Number> privMatrix = (List<Number>) (
+                    !fontDicts.isEmpty() ? fontDicts.get(0).getOrDefault("FontMatrix", null) : null
+            );
             // some malformed fonts have FontMatrix in their Font DICT, see PDFBOX-2495
             List<Number> matrix = topDict.getArray("FontMatrix", null);
             if (matrix == null)
