@@ -1227,7 +1227,7 @@ public class PDFDebugger extends JFrame implements Callable<Integer>, HyperlinkL
         {
             return Float.toString(((COSFloat) selectedNode).floatValue());
         }
-        if (selectedNode instanceof COSNull)
+        if (selectedNode == COSNull.NULL)
         {
             return "null";
         }

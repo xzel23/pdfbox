@@ -239,7 +239,7 @@ public class COSWriterObjectStream
         {
             writeCOSDictionary(output, (COSDictionary) base);
         }
-        else if (base instanceof COSNull)
+        else if (base == COSNull.NULL)
         {
             writeCOSNull(output);
         }

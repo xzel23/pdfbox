@@ -210,7 +210,7 @@ public class ContentStreamWriter
             output.write( COSWriter.DICT_CLOSE );
             output.write( SPACE );
         }
-        else if (o instanceof COSNull)
+        else if (o == COSNull.NULL)
         {
             output.write("null".getBytes(StandardCharsets.US_ASCII));
             output.write(SPACE);

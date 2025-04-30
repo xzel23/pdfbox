@@ -182,7 +182,7 @@ public class COSDictionary extends COSBase implements COSUpdateInfo
         {
             retval = ((COSObject) retval).getObject();
         }
-        if (retval instanceof COSNull)
+        if (retval == COSNull.NULL)
         {
             retval = null;
         }

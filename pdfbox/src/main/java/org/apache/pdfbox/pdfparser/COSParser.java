@@ -485,7 +485,7 @@ public class COSParser extends BaseParser implements ICOSParser
                 referencedObject = parseObjectStreamObject(-offsetOrObjstmObNr, objKey);
             }
         }
-        if (referencedObject == null || referencedObject instanceof COSNull)
+        if (referencedObject == null || referencedObject == COSNull.NULL)
         {
             // not defined object -> NULL object (Spec. 1.7, chap. 3.2.9)
             // or some other issue with dereferencing
@@ -970,7 +970,7 @@ public class COSParser extends BaseParser implements ICOSParser
                 COSObject kidObject = (COSObject) kid;
                 COSBase kidBaseobject = kidObject.getObject();
                 // object wasn't dereferenced -> remove it
-                if (kidBaseobject == null || kidBaseobject.equals(COSNull.NULL))
+                if (kidBaseobject == null || kidBaseobject == COSNull.NULL)
                 {
                     LOG.warn("Removed null object {} from pages dictionary", kid);
                     kidsArray.remove(kid);
