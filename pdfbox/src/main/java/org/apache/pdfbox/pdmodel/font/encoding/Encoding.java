@@ -174,4 +174,14 @@ public abstract class Encoding implements COSObjectable
      * @return the name of the encoding
      */
     public abstract String getEncodingName();
+
+    /**
+     * Returns the code for the given name.
+     *
+     * @param name the name of the encoding
+     * @return the code of the encoding
+     */
+    public int getCode(String name) {
+        return inverted.get(name);
+    }
 }

@@ -396,17 +396,16 @@ public class PDTrueTypeFont extends PDSimpleFont implements PDVectorFont
     @Override
     protected byte[] encode(int unicode) throws IOException
     {
+        String name = getGlyphList().codePointToName(unicode);
         if (encoding != null)
         {
-            if (!encoding.contains(getGlyphList().codePointToName(unicode)))
+            int code = encoding.getCode(name);
+            if (code == 0)
             {
                 throw new IllegalArgumentException(
                     String.format("U+%04X is not available in font %s encoding: %s",
                                   unicode, getName(), encoding.getEncodingName()));
             }
-
-            String name = getGlyphList().codePointToName(unicode);
-            Map<String, Integer> inverted = encoding.getNameToCodeMap();
 
             if (!ttf.hasGlyph(name))
             {
@@ -419,21 +418,18 @@ public class PDTrueTypeFont extends PDSimpleFont implements PDVectorFont
                 }
             }
 
-            int code = inverted.get(name);
             return new byte[] { (byte)code };
         }
         else
         {
             // use TTF font's built-in encoding
-            String name = getGlyphList().codePointToName(unicode);
-
-            if (!ttf.hasGlyph(name))
+            int gid = ttf.nameToGID(name);
+            if (gid == 0)
             {
                 throw new IllegalArgumentException(
                     String.format("No glyph for U+%04X in font %s", unicode, getName()));
             }
             
-            int gid = ttf.nameToGID(name);
             Integer code = getGIDToCode().get(gid);
             if (code == null)
             {
