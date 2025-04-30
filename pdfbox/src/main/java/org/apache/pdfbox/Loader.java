@@ -25,6 +25,7 @@ import java.io.InputStream;
 
 import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.io.RandomAccessReadBufferedFile;
+import org.apache.pdfbox.io.RandomAccessReadWrapper;
 import org.apache.pdfbox.io.RandomAccessStreamCache.StreamCacheCreateFunction;
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 import org.apache.pdfbox.io.RandomAccessRead;
@@ -227,7 +228,7 @@ public class Loader
         try
         {
             // RandomAccessRead is not closed here, may be needed for signing
-            source = new RandomAccessReadBuffer(input);
+            source = new RandomAccessReadWrapper(input);
             PDFParser parser = new PDFParser(source, password, keyStore, alias, streamCacheCreateFunction);
             return parser.parse();
         }
