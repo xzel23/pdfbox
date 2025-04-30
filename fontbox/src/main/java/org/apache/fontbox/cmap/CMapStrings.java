@@ -18,21 +18,18 @@
 package org.apache.fontbox.cmap;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Many CMaps are using the same values for the mapped strings. This class provides all common one- and two-byte
  * mappings to avoid duplicate strings.
  */
-public class CMapStrings
+public final class CMapStrings
 {
-    private static final List<String> twoByteMappings = new ArrayList<>(256 * 256);
-    private static final List<String> oneByteMappings = new ArrayList<>(256);
+    private static final String[] oneByteMappings = new String[256];
+    private static final String[] twoByteMappings = new String[256 * 256];
 
-    private static final List<Integer> indexValues = new ArrayList<>(256 * 256);
-    private static final List<byte[]> oneByteValues = new ArrayList<>(256);
-    private static final List<byte[]> twoByteValues = new ArrayList<>(256 * 256);
+    private static final byte[][] oneByteValues = new byte[256][];
+    private static final byte[][] twoByteValues = new byte[256 * 256][];
 
     static
     {
@@ -51,16 +48,15 @@ public class CMapStrings
             for (int j = 0; j < 256; j++)
             {
                 byte[] bytes = { (byte) i, (byte) j };
-                twoByteMappings.add(new String(bytes, StandardCharsets.UTF_16BE));
-                twoByteValues.add(bytes);
-                indexValues.add((i * 256) + j);
+                twoByteMappings[(i << 8) | j] = new String(bytes, StandardCharsets.UTF_16BE);
+                twoByteValues[(i << 8) | j] = bytes;
             }
         }
         for (int i = 0; i < 256; i++)
         {
             byte[] bytes = { (byte) i };
-            oneByteMappings.add(new String(bytes, StandardCharsets.ISO_8859_1));
-            oneByteValues.add(bytes);
+            oneByteMappings[i] = new String(bytes, StandardCharsets.ISO_8859_1);
+            oneByteValues[i] = bytes;
         }
     }
 
@@ -73,12 +69,14 @@ public class CMapStrings
      */
     public static String getMapping(byte[] bytes)
     {
-        if (bytes.length > 2)
-        {
-            return null;
+        switch (bytes.length) {
+            case 1:
+                return oneByteMappings[bytes[0] & 0xff];
+            case 2:
+                return twoByteMappings[((bytes[0] & 0xff) << 8) | (bytes[1] & 0xff)];
+            default:
+                return null;
         }
-        return bytes.length == 1 ? oneByteMappings.get(CMap.toInt(bytes))
-                : twoByteMappings.get(CMap.toInt(bytes));
     }
 
     /**
@@ -89,13 +87,16 @@ public class CMapStrings
      * @param bytes the given combination of bytes
      * @return the Integer representation for the given combination of bytes
      */
-    public static Integer getIndexValue(byte[] bytes)
+    public static int getIndexValue(byte[] bytes)
     {
-        if (bytes.length > 2)
-        {
-            return null;
+        switch (bytes.length) {
+            case 1:
+                return bytes[0] & 0xff;
+            case 2:
+                return ((bytes[0] & 0xff) << 8) | (bytes[1] & 0xff);
+            default:
+                throw new IllegalArgumentException( "Invalid number of bytes " + bytes.length);
         }
-        return indexValues.get(CMap.toInt(bytes));
     }
 
     /**
@@ -107,12 +108,14 @@ public class CMapStrings
      */
     public static byte[] getByteValue(byte[] bytes)
     {
-        if (bytes.length > 2)
-        {
-            return null;
+        switch (bytes.length) {
+            case 1:
+                return oneByteValues[bytes[0] & 0xff];
+            case 2:
+                return twoByteValues[((bytes[0] & 0xff) << 8) | (bytes[1] & 0xff)];
+            default:
+                return null;
         }
-        return bytes.length == 1 ? oneByteValues.get(CMap.toInt(bytes))
-                : twoByteValues.get(CMap.toInt(bytes));
     }
 
 }
