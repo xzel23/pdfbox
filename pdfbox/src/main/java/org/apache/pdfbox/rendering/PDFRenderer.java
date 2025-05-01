@@ -24,6 +24,8 @@ import java.awt.GraphicsDevice;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.function.BiFunction;
+
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -163,8 +165,7 @@ public class PDFRenderer
 
     /**
      *
-     * @return get the image downscaling optimization threshold. See
-     * {@link #getImageDownscalingOptimizationThreshold()} for details.
+     * @return get the image downscaling optimization threshold.
      */
     public float getImageDownscalingOptimizationThreshold()
     {
@@ -257,11 +258,66 @@ public class PDFRenderer
      * @return the rendered page image
      * @throws IOException if the PDF cannot be read
      */
-    public BufferedImage renderImage(int pageIndex, float scale, ImageType imageType, RenderDestination destination)
-            throws IOException
+    public BufferedImage renderImage(int pageIndex, float scale, ImageType imageType, RenderDestination destination) throws IOException
     {
         PDPage page = pageTree.get(pageIndex);
+        BiFunction<Integer, Integer, BufferedImage> imageFactory = defaultImageFactory(imageType, hasBlendMode(page));
+        BufferedImage image = renderPage(page, scale, imageFactory, destination);
 
+        if (image.getType() != imageType.toBufferedImageType())
+        {
+            // PDFBOX-4095: draw temporary transparent image on white background
+            BufferedImage newImage =
+                    new BufferedImage(image.getWidth(), image.getHeight(), imageType.toBufferedImageType());
+            Graphics2D dstGraphics = newImage.createGraphics();
+            dstGraphics.setBackground(Color.WHITE);
+            dstGraphics.clearRect(0, 0, image.getWidth(), image.getHeight());
+            dstGraphics.drawImage(image, 0, 0, null);
+            dstGraphics.dispose();
+            image = newImage;
+        }
+
+        return image;
+    }
+
+    /**
+     * Creates a default image factory that generates BufferedImage instances based on the specified image type
+     * and whether a blend mode is applied.
+     *
+     * @param imageType The type of the image to be created, used to determine the BufferedImage type.
+     * @param hasBlendMode A flag indicating if blending is enabled, which can affect the type of the returned image.
+     * @return A BiFunction that takes the width and height of the image as input and produces a BufferedImage
+     *         with the appropriate type.
+     */
+    public BiFunction<Integer, Integer, BufferedImage> defaultImageFactory(ImageType imageType, boolean hasBlendMode)
+    {
+        int bimType;
+        if (imageType != org.apache.pdfbox.rendering.ImageType.ARGB && hasBlendMode) {
+            // PDFBOX-4095: if the PDF has blending on the top level, draw on transparent background
+            // Inspired from PDF.js: if a PDF page uses any blend modes other than Normal,
+            // PDF.js renders everything on a fully transparent RGBA canvas.
+            // Finally when the page has been rendered, PDF.js draws the RGBA canvas on a white canvas.
+            bimType = BufferedImage.TYPE_INT_ARGB;
+        } else {
+            bimType = imageType.toBufferedImageType();
+        }
+
+        return (w, h) -> new BufferedImage(w, h, bimType);
+    }
+
+    /**
+     * Renders a PDF page into a BufferedImage using the specified rendering parameters.
+     *
+     * @param page         The PDPage object representing the PDF page to be rendered.
+     * @param scale        The scaling factor to be applied when rendering the page.
+     * @param imageFactory A BiFunction responsible for creating a BufferedImage with given dimensions.
+     * @param destination  The RenderDestination specifying whether rendering is for display, export, or other purposes.
+     * @return A BufferedImage containing the rendered page.
+     * @throws IOException If the page cannot be rendered due to an I/O error or size limitations.
+     */
+    public <I extends BufferedImage> I renderPage(PDPage page, float scale, BiFunction<Integer, Integer, I> imageFactory, RenderDestination destination)
+            throws IOException
+    {
         PDRectangle cropBox = page.getCropBox();
         float widthPt = cropBox.getWidth();
         float heightPt = cropBox.getHeight();
@@ -279,29 +335,14 @@ public class PDFRenderer
 
         int rotationAngle = page.getRotation();
 
-        int bimType;
-        if (imageType != ImageType.ARGB && hasBlendMode(page))
-        {
-            // PDFBOX-4095: if the PDF has blending on the top level, draw on transparent background
-            // Inspired from PDF.js: if a PDF page uses any blend modes other than Normal, 
-            // PDF.js renders everything on a fully transparent RGBA canvas. 
-            // Finally when the page has been rendered, PDF.js draws the RGBA canvas on a white canvas.
-            bimType = BufferedImage.TYPE_INT_ARGB;
-        }
-        else
-        {
-            bimType = imageType.toBufferedImageType();
-        }
-
-        // swap width and height
-        BufferedImage image;
+        I image;
         if (rotationAngle == 90 || rotationAngle == 270)
         {
-            image = new BufferedImage(heightPx, widthPx, bimType);
+            image = imageFactory.apply(heightPx, widthPx);
         }
         else
         {
-            image = new BufferedImage(widthPx, heightPx, bimType);
+            image = imageFactory.apply(widthPx, heightPx);
         }
 
         pageImage = image;
@@ -330,19 +371,6 @@ public class PDFRenderer
         drawer.drawPage(g, cropBox);
         
         g.dispose();
-
-        if (image.getType() != imageType.toBufferedImageType())
-        {
-            // PDFBOX-4095: draw temporary transparent image on white background
-            BufferedImage newImage = 
-                    new BufferedImage(image.getWidth(), image.getHeight(), imageType.toBufferedImageType());
-            Graphics2D dstGraphics = newImage.createGraphics();
-            dstGraphics.setBackground(Color.WHITE);
-            dstGraphics.clearRect(0, 0, image.getWidth(), image.getHeight());
-            dstGraphics.drawImage(image, 0, 0, null);
-            dstGraphics.dispose();
-            image = newImage;
-        }
 
         return image;
     }
