@@ -26,6 +26,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -663,6 +665,8 @@ public class TrueTypeFont implements FontBoxFont, Closeable
         return cmap;
     }
 
+    private static final Predicate<String> IS_GID_NAME = Pattern.compile("g\\d+").asMatchPredicate();
+
     /**
      * Returns the GID for the given PostScript name, if the "post" table is present.
      * 
@@ -693,7 +697,7 @@ public class TrueTypeFont implements FontBoxFont, Closeable
         }
 
         // PDFBOX-5604: assume gnnnnn is a gid
-        if (name.matches("g\\d+"))
+        if (IS_GID_NAME.test(name))
         {
             return Integer.parseInt(name, 1, name.length(), 10);
         }

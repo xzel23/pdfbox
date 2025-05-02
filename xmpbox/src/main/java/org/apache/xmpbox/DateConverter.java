@@ -32,6 +32,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -71,6 +72,8 @@ public final class DateConverter
     {
     }
 
+    private static final Predicate<String> IS_ISO860_DATE_STRING = Pattern.compile("\\d{4}-\\d{2}-\\d{2}T.*").asMatchPredicate();
+
     /**
      * This will convert a string to a calendar.
      * 
@@ -100,7 +103,7 @@ public final class DateConverter
             {
                 SimpleTimeZone zone = null;
                 
-                if (Pattern.matches("^\\d{4}-\\d{2}-\\d{2}T.*", date))
+                if (IS_ISO860_DATE_STRING.test(date))
                 {
                     // Assuming ISO860 date string
                     return fromISO8601(date);
