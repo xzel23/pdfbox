@@ -747,8 +747,8 @@ public abstract class BaseParser
                         }
                         else
                         {
-                            LOG.warn("Invalid value(s) for an object key {} {}", number.longValue(),
-                                    genNumber.intValue());
+                            LOG.warn("Invalid value(s) for an object key {} {}", number::longValue,
+                                    genNumber::intValue);
                         }
                     }
                 }
@@ -1004,7 +1004,7 @@ public abstract class BaseParser
             source.rewind(1);
         }
 
-        return COSNumber.get(buf.toString());
+        return COSNumber.get(buf);
     }
 
     /**

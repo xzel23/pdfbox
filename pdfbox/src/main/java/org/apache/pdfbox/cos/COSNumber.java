@@ -55,7 +55,7 @@ public abstract class COSNumber extends COSBase
      *
      * @throws IOException If the string is not a number.
      */
-    public static COSNumber get( String number ) throws IOException
+    public static COSNumber get( CharSequence number ) throws IOException
     {
         if (number.length() == 1)
         {
@@ -73,28 +73,28 @@ public abstract class COSNumber extends COSBase
         } 
         if (isFloat(number))
         {
-            return new COSFloat(number);
+            return new COSFloat(number.toString());
         }
         try
         {
-            return COSInteger.get(Long.parseLong(number));
+            return COSInteger.get(Long.parseLong(number, 0, number.length(), 10));
         }
         catch (NumberFormatException e)
         {
             // check if the given string could be a number at all
-            String numberString = number.startsWith("+") || number.startsWith("-")
-                    ? number.substring(1) : number;
-            if (!numberString.matches("\\d*"))
+            CharSequence numberString = CSUtil.startsWith(number,"+") || CSUtil.startsWith(number, "-")
+                    ? number.subSequence(1, number.length()) : number;
+            if (!CSUtil.matches(numberString, "\\d*"))
             {
                 throw new IOException("Not a number: " + number);
             }
             // return a limited COSInteger value which is marked as invalid
-            return number.startsWith("-") ? COSInteger.OUT_OF_RANGE_MIN
+            return CSUtil.startsWith(number, "-") ? COSInteger.OUT_OF_RANGE_MIN
                     : COSInteger.OUT_OF_RANGE_MAX;
         }
     }
 
-    private static boolean isFloat( String number )
+    private static boolean isFloat( CharSequence number )
     {
         int length = number.length();
         for (int i = 0; i < length; i++)
