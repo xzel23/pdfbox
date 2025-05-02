@@ -65,6 +65,10 @@ public final class DateConverter
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S")
         };
 
+    private static final Pattern PATTERN_ISO8601_TIME_ZONE = Pattern.compile(
+            "[\\d-]*T?[\\d-\\.]([A-Z]{1,4})$|(.*\\d*)([A-Z][a-z]+\\/[A-Z][a-z]+)$"
+    );
+
     /**
      * According to check-style, Utility classes should not have a public or default constructor.
      */
@@ -345,10 +349,7 @@ public final class DateConverter
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS][XXX][zzz]");
 
         // Pattern to test for a time zone string
-        Pattern timeZonePattern = Pattern.compile(
-                    "[\\d-]*T?[\\d-\\.]([A-Z]{1,4})$|(.*\\d*)([A-Z][a-z]+\\/[A-Z][a-z]+)$"
-                );
-        Matcher timeZoneMatcher = timeZonePattern.matcher(dateString);
+        Matcher timeZoneMatcher = PATTERN_ISO8601_TIME_ZONE.matcher(dateString);
         
         String timeZoneString = null;
         
