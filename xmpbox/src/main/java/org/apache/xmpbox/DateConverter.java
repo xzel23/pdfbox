@@ -32,6 +32,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,12 +65,18 @@ public final class DateConverter
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S")
         };
 
+    private static final Pattern PATTERN_ISO8601_TIME_ZONE = Pattern.compile(
+            "[\\d-]*T?[\\d-\\.]([A-Z]{1,4})$|(.*\\d*)([A-Z][a-z]+\\/[A-Z][a-z]+)$"
+    );
+
     /**
      * According to check-style, Utility classes should not have a public or default constructor.
      */
     private DateConverter()
     {
     }
+
+    private static final Predicate<String> IS_ISO860_DATE_STRING = Pattern.compile("\\d{4}-\\d{2}-\\d{2}T.*").asMatchPredicate();
 
     /**
      * This will convert a string to a calendar.
@@ -100,7 +107,7 @@ public final class DateConverter
             {
                 SimpleTimeZone zone = null;
                 
-                if (Pattern.matches("^\\d{4}-\\d{2}-\\d{2}T.*", date))
+                if (IS_ISO860_DATE_STRING.test(date))
                 {
                     // Assuming ISO860 date string
                     return fromISO8601(date);
@@ -342,10 +349,7 @@ public final class DateConverter
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS][XXX][zzz]");
 
         // Pattern to test for a time zone string
-        Pattern timeZonePattern = Pattern.compile(
-                    "[\\d-]*T?[\\d-\\.]([A-Z]{1,4})$|(.*\\d*)([A-Z][a-z]+\\/[A-Z][a-z]+)$"
-                );
-        Matcher timeZoneMatcher = timeZonePattern.matcher(dateString);
+        Matcher timeZoneMatcher = PATTERN_ISO8601_TIME_ZONE.matcher(dateString);
         
         String timeZoneString = null;
         

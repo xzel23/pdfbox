@@ -20,6 +20,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.pdfbox.contentstream.PDContentStream;
@@ -31,6 +34,7 @@ import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.cos.COSNull;
 import org.apache.pdfbox.cos.COSNumber;
+import org.apache.pdfbox.cos.CSUtil;
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 
 /**
@@ -222,14 +226,13 @@ public class PDFStreamParser extends BaseParser
                         dotNotRead = false;
                     }
                 }
-                String s = buf.toString();
-                if ("+".equals(s))
+                if (CSUtil.contentEquals(buf, "+"))
                 {
                     // PDFBOX-5906
                     LOG.warn("isolated '+' is ignored");
                     return COSNull.NULL;
                 }
-                return COSNumber.get(s);
+                return COSNumber.get(buf);
             case 'B':
                 String nextOperator = readString();
                 Operator beginImageOP = Operator.getOperator(nextOperator);
@@ -319,6 +322,8 @@ public class PDFStreamParser extends BaseParser
         return null;
     }
 
+    private static final Predicate<String> IS_NO_BIN_DATA = Pattern.compile("\\d*\\.?\\d*").asMatchPredicate();
+
     /**
      * Looks up an amount of bytes if they contain only ASCII characters (no
      * control sequences etc.), and that these ASCII characters begin with a
@@ -367,8 +372,7 @@ public class PDFStreamParser extends BaseParser
                 // usually, the operator here is Q, sometimes EMC (PDFBOX-2376), S (PDFBOX-3784),
                 // or a number (PDFBOX-5957)
                 s = new String(binCharTestArr, startOpIdx, endOpIdx - startOpIdx);
-                if (!"Q".equals(s) && !"EMC".equals(s) && !"S".equals(s) &&
-                    !s.matches("^\\d*\\.?\\d*$"))
+                if (!"Q".equals(s) && !"EMC".equals(s) && !"S".equals(s) && !IS_NO_BIN_DATA.test(s))
                 {
                     // operator is not Q, not EMC, not S, nur a number -> assume binary data
                     noBinData = false;
@@ -385,7 +389,7 @@ public class PDFStreamParser extends BaseParser
                 }
                 LOG.debug("startOpIdx: {} endOpIdx: {} s = '{}'", startOpIdx, endOpIdx, s);
                 // look for token of 3 chars max or a number
-                if (endOpIdx - startOpIdx > 3 && !s.matches("^\\d*\\.?\\d*$"))
+                if (endOpIdx - startOpIdx > 3 && !IS_NO_BIN_DATA.test(s))
                 {
                     noBinData = false; // "operator" too long, assume binary data
                 }
